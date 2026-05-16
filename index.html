@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>𝑪𝒐𝒖𝒑𝒍𝒆𝒔 𝑿 | مجتمع الحب والتعارف</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* إعدادات الألوان والتصميم الأساسي */
+        :root {
+            --primary: #9b111e; /* أحمر غامق فخم */
+            --secondary: #d90429;
+            --bg: #0b090a; /* أسود عميق */
+            --text: #f8f9fa;
+        }
+        
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Tajawal', sans-serif; 
+        }
+        
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            overflow-x: hidden; 
+        }
+
+        /* شريط التنقل العلوي */
+        nav { 
+            padding: 20px 50px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: rgba(11, 9, 10, 0.8); 
+            position: fixed; 
+            width: 100%; 
+            z-index: 100; 
+            backdrop-filter: blur(15px); 
+            border-bottom: 1px solid rgba(155, 17, 30, 0.2);
+        }
+        
+        .logo { 
+            font-size: 32px; 
+            font-weight: 900; 
+            letter-spacing: 2px; 
+            text-shadow: 0 0 10px rgba(155, 17, 30, 0.5);
+        }
+        .logo span { color: var(--primary); }
+
+        /* القسم الرئيسي (الهيرو) */
+        .hero { 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            background: radial-gradient(circle at center, #2b0b10 0%, var(--bg) 70%); 
+            position: relative; 
+            overflow: hidden;
+        }
+        
+        .hero h1 { 
+            font-size: 5rem; 
+            font-weight: 900; 
+            margin-bottom: 20px; 
+            text-shadow: 0 0 25px rgba(217, 4, 41, 0.6); 
+            z-index: 10;
+        }
+        
+        .hero p { 
+            font-size: 1.5rem; 
+            color: #adb5bd; 
+            max-width: 650px; 
+            margin-bottom: 40px; 
+            line-height: 1.6;
+            z-index: 10;
+        }
+        
+        /* زر الديسكورد */
+        .btn { 
+            padding: 15px 45px; 
+            font-size: 1.3rem; 
+            font-weight: bold; 
+            background: linear-gradient(45deg, var(--primary), var(--secondary)); 
+            color: white; 
+            border: none; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            text-decoration: none; 
+            transition: all 0.4s ease; 
+            box-shadow: 0 0 20px rgba(155, 17, 30, 0.6); 
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn:hover { 
+            transform: scale(1.08) translateY(-5px); 
+            box-shadow: 0 10px 30px rgba(217, 4, 41, 0.9); 
+        }
+
+        /* قسم المميزات */
+        .features { 
+            padding: 100px 20px; 
+            text-align: center; 
+            background: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239b111e" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+        }
+        
+        .features h2 { 
+            font-size: 3rem; 
+            margin-bottom: 60px; 
+            color: var(--text); 
+            text-shadow: 0 0 10px rgba(255,255,255,0.1);
+        }
+        .features h2 span { color: var(--primary); }
+        
+        .cards { 
+            display: flex; 
+            justify-content: center; 
+            gap: 40px; 
+            flex-wrap: wrap; 
+        }
+        
+        .card { 
+            background: #161a1d; 
+            padding: 40px 30px; 
+            border-radius: 20px; 
+            width: 320px; 
+            transition: all 0.4s ease; 
+            border-bottom: 5px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transition: 0.5s;
+        }
+        
+        .card:hover::before { left: 100%; }
+        .card:hover { 
+            transform: translateY(-15px); 
+            box-shadow: 0 15px 30px rgba(155, 17, 30, 0.3); 
+            border-color: var(--secondary);
+        }
+        
+        .card i { 
+            font-size: 3.5rem; 
+            color: var(--secondary); 
+            margin-bottom: 25px; 
+            text-shadow: 0 0 15px rgba(217, 4, 41, 0.4);
+        }
+        
+        .card h3 { 
+            font-size: 1.6rem; 
+            margin-bottom: 15px; 
+            font-weight: 700;
+        }
+        
+        .card p { 
+            color: #adb5bd; 
+            line-height: 1.7; 
+            font-size: 1.1rem;
+        }
+
+        /* تأثير القلوب المتطايرة بالخلفية */
+        .heart-particle { 
+            position: absolute; 
+            color: var(--primary); 
+            font-size: 20px; 
+            animation: float 5s linear infinite; 
+            opacity: 0; 
+            z-index: 1;
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(100vh) scale(0); opacity: 0; } 
+            20% { opacity: 0.4; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; } 
+        }
+
+        /* حقوق النشر */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #000;
+            color: #6c757d;
+            border-top: 1px solid rgba(155, 17, 30, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">𝑪𝒐𝒖𝒑𝒍𝒆𝒔 <span>𝑿</span></div>
+    </nav>
+
+    <section class="hero">
+        <h1>𝑪𝒐𝒖𝒑𝒍𝒆𝒔 𝑿</h1>
+        <p>المكان الذي تلتقي فيه القلوب وتُبنى فيه العلاقات. انضم إلى أفخم مجتمع ديسكورد للتعارف وتكوين صداقات حقيقية في بيئة راقية وآمنة.</p>
+        
+        <a href="#" class="btn" target="_blank"><i class="fab fa-discord"></i> انضم للسيرفر الآن</a>
+    </section>
+
+    <section class="features">
+        <h2>ليش تختار <span>سيرفرنا؟</span></h2>
+        <div class="cards">
+            <div class="card">
+                <i class="fas fa-heartbeat"></i>
+                <h3>فعاليات رومانسية</h3>
+                <p>مسابقات وفعاليات يومية مصممة خصيصاً عشان تقرب القلوب وتكسر الجليد بين الأعضاء بكل سلاسة.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>بيئة آمنة وراقية</h3>
+                <p>نظام حماية وإدارة صارمة تضمن لك تجربة خالية من الإزعاج واحترام متبادل بين الجميع على مدار الساعة.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-headphones-alt"></i>
+                <h3>رومات صوتية هادئة</h3>
+                <p>رومات مخصصة للسوالف الهادية والتعارف العميق بتنسيق عالي الجودة وبعيداً عن الفوضى.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>جميع الحقوق محفوظة لسيرفر © 2026 𝑪𝒐𝒖𝒑𝒍𝒆𝒔 𝑿</p>
+    </footer>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            heart.innerHTML = '<i class="fas fa-heart"></i>';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's'; // سرعة عشوائية
+            heart.style.fontSize = Math.random() * 15 + 10 + 'px'; // حجم عشوائي
+            
+            document.querySelector('.hero').appendChild(heart);
+            
+            setTimeout(() => { 
+                heart.remove(); 
+            }, 6000);
+        }
+        
+        // كمية القلوب المتطايرة (كل 400 جزء من الثانية يطلع قلب)
+        setInterval(createHeart, 400);
+    </script>
+
+</body>
+</html>
