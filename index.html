@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>CAPLES X</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
+
 *{
 margin:0;
 padding:0;
@@ -17,61 +20,59 @@ scroll-behavior:smooth;
 }
 
 body{
-background:#050505;
-color:white;
+background:#0b0b0f;
 overflow-x:hidden;
+color:white;
 }
 
 /* خلفية */
-.background{
+body::before{
+content:'';
 position:fixed;
-top:0;
-left:0;
 width:100%;
 height:100%;
+top:0;
+left:0;
 background:
-linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.85)),
-url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1920&auto=format&fit=crop');
+linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.92)),
+url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=2070&auto=format&fit=crop');
 background-size:cover;
 background-position:center;
-z-index:-2;
-animation:bgzoom 20s infinite alternate;
+z-index:-3;
+animation:bg 15s infinite alternate;
 }
 
-@keyframes bgzoom{
+@keyframes bg{
 from{
 transform:scale(1);
 }
 to{
-transform:scale(1.1);
+transform:scale(1.08);
 }
 }
 
-/* نيون */
-.glow{
+/* تأثيرات */
+.blur{
 position:fixed;
 width:500px;
 height:500px;
-background:rgba(255,255,255,.05);
-filter:blur(120px);
+background:#ff4d88;
+filter:blur(180px);
+opacity:.15;
 border-radius:50%;
-z-index:-1;
-animation:move 12s infinite alternate;
+z-index:-2;
+animation:move 8s infinite alternate;
 }
 
-.glow:nth-child(2){
-top:10%;
-left:10%;
-}
-
-.glow:nth-child(3){
-bottom:10%;
-right:10%;
+.blur2{
+right:0;
+bottom:0;
+background:#ffffff;
 }
 
 @keyframes move{
 from{
-transform:translateY(0px);
+transform:translateY(0);
 }
 to{
 transform:translateY(100px);
@@ -84,32 +85,34 @@ position:fixed;
 top:0;
 left:0;
 width:100%;
-padding:20px 8%;
+padding:22px 8%;
 display:flex;
 justify-content:space-between;
 align-items:center;
 backdrop-filter:blur(12px);
-background:rgba(255,255,255,.04);
+background:rgba(255,255,255,.03);
 border-bottom:1px solid rgba(255,255,255,.08);
-z-index:1000;
+z-index:999;
 }
 
 .logo{
 font-size:32px;
 font-weight:900;
-letter-spacing:3px;
+letter-spacing:5px;
+color:white;
+text-shadow:0 0 25px rgba(255,255,255,.3);
 }
 
 nav a{
 color:white;
 text-decoration:none;
 margin:0 15px;
-transition:.3s;
 font-weight:600;
+transition:.3s;
 }
 
 nav a:hover{
-color:#999;
+color:#ff4d88;
 }
 
 /* الصفحة الرئيسية */
@@ -122,26 +125,28 @@ text-align:center;
 padding:0 20px;
 }
 
+.hero-content{
+max-width:900px;
+}
+
 .hero-content h1{
-font-size:90px;
+font-size:110px;
 font-weight:900;
-letter-spacing:8px;
+letter-spacing:10px;
 margin-bottom:20px;
-text-shadow:0 0 30px rgba(255,255,255,.4);
-animation:fadeUp 1s ease;
+text-shadow:0 0 40px rgba(255,255,255,.35);
+animation:fade 1s ease;
 }
 
 .hero-content p{
-font-size:22px;
-max-width:700px;
-margin:auto;
-opacity:.8;
-line-height:1.8;
-animation:fadeUp 1.5s ease;
+font-size:24px;
+line-height:2;
+opacity:.85;
+animation:fade 1.5s ease;
 }
 
 .hero-buttons{
-margin-top:40px;
+margin-top:50px;
 display:flex;
 justify-content:center;
 gap:20px;
@@ -149,50 +154,49 @@ flex-wrap:wrap;
 }
 
 .btn{
-padding:16px 40px;
-border:none;
-border-radius:50px;
+padding:18px 45px;
+border-radius:60px;
 font-size:18px;
-font-weight:700;
-cursor:pointer;
-transition:.4s;
+font-weight:800;
 text-decoration:none;
+transition:.4s;
 }
 
-.btn-primary{
-background:white;
-color:black;
-}
-
-.btn-primary:hover{
-transform:translateY(-5px);
-box-shadow:0 0 25px rgba(255,255,255,.5);
-}
-
-.btn-secondary{
-background:transparent;
-border:1px solid rgba(255,255,255,.3);
+.btn-main{
+background:linear-gradient(45deg,#ff4d88,#ff8fab);
 color:white;
+box-shadow:0 0 25px rgba(255,77,136,.5);
 }
 
-.btn-secondary:hover{
+.btn-main:hover{
+transform:translateY(-5px) scale(1.05);
+}
+
+.btn-sec{
+border:1px solid rgba(255,255,255,.2);
+color:white;
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(10px);
+}
+
+.btn-sec:hover{
 background:white;
 color:black;
 }
 
-/* الأقسام */
+/* أقسام */
 section{
-padding:120px 10%;
+padding:130px 10%;
 }
 
-.section-title{
-font-size:50px;
-margin-bottom:60px;
-text-align:center;
+.title{
+font-size:55px;
 font-weight:900;
+text-align:center;
+margin-bottom:70px;
 }
 
-/* البطاقات */
+/* بطاقات */
 .cards{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
@@ -201,10 +205,10 @@ gap:30px;
 
 .card{
 background:rgba(255,255,255,.05);
+padding:45px;
+border-radius:30px;
+backdrop-filter:blur(14px);
 border:1px solid rgba(255,255,255,.08);
-padding:40px;
-border-radius:25px;
-backdrop-filter:blur(10px);
 transition:.4s;
 }
 
@@ -220,63 +224,64 @@ margin-bottom:20px;
 
 .card p{
 opacity:.8;
-line-height:1.8;
+line-height:1.9;
 }
 
 /* التقديم */
-.form-box{
-max-width:700px;
+.apply-box{
+max-width:800px;
 margin:auto;
 background:rgba(255,255,255,.05);
 padding:50px;
-border-radius:30px;
-backdrop-filter:blur(12px);
+border-radius:35px;
 border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(16px);
 }
 
-.input-group{
+.input{
 margin-bottom:25px;
 }
 
-.input-group label{
+.input label{
 display:block;
-margin-bottom:10px;
+margin-bottom:12px;
 font-weight:700;
 }
 
-.input-group input,
-.input-group textarea,
-.input-group select{
+.input input,
+.input textarea,
+.input select{
 width:100%;
 padding:18px;
+background:rgba(255,255,255,.06);
 border:none;
-outline:none;
-border-radius:15px;
-background:rgba(255,255,255,.08);
+border-radius:18px;
 color:white;
 font-size:16px;
+outline:none;
 }
 
 textarea{
+height:160px;
 resize:none;
-height:150px;
 }
 
-.submit-btn{
+.submit{
 width:100%;
 padding:18px;
 border:none;
-border-radius:15px;
-background:white;
-color:black;
+border-radius:18px;
+background:linear-gradient(45deg,#ff4d88,#ff8fab);
+color:white;
 font-size:18px;
 font-weight:900;
 cursor:pointer;
 transition:.3s;
 }
 
-.submit-btn:hover{
-transform:scale(1.03);
+.submit:hover{
+transform:scale(1.02);
+box-shadow:0 0 30px rgba(255,77,136,.5);
 }
 
 /* فوتر */
@@ -287,10 +292,11 @@ border-top:1px solid rgba(255,255,255,.08);
 background:rgba(255,255,255,.03);
 }
 
-@keyframes fadeUp{
+/* أنيميشن */
+@keyframes fade{
 from{
 opacity:0;
-transform:translateY(50px);
+transform:translateY(40px);
 }
 to{
 opacity:1;
@@ -301,15 +307,15 @@ transform:translateY(0);
 @media(max-width:768px){
 
 .hero-content h1{
-font-size:55px;
+font-size:65px;
 }
 
-.section-title{
-font-size:35px;
+.hero-content p{
+font-size:18px;
 }
 
-header{
-padding:20px;
+.title{
+font-size:40px;
 }
 
 nav{
@@ -317,16 +323,17 @@ display:none;
 }
 
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="background"></div>
-<div class="glow"></div>
-<div class="glow"></div>
+<div class="blur"></div>
+<div class="blur blur2"></div>
 
 <header>
+
 <div class="logo">CAPLES X</div>
 
 <nav>
@@ -334,6 +341,7 @@ display:none;
 <a href="#features">المميزات</a>
 <a href="#apply">التقديم</a>
 </nav>
+
 </header>
 
 <section class="hero">
@@ -343,13 +351,20 @@ display:none;
 <h1>CAPLES X</h1>
 
 <p>
-مرحبا بك في أقوى مجتمع احترافي بتصميم فاخر وسينمائي.
-انضم للنخبة وابدأ رحلتك داخل عالم مختلف بالكامل.
+أكبر مجتمع حب وتعارف احترافي بتجربة فاخرة مستوحاة من تصميم Discord
+لكن بعالم مختلف مليء بالمشاعر، الفخامة، والأجواء الراقية.
 </p>
 
 <div class="hero-buttons">
-<a href="#apply" class="btn btn-primary">ابدأ التقديم</a>
-<a href="#features" class="btn btn-secondary">استكشاف</a>
+
+<a href="https://discord.gg/Yf5JBGyrp" class="btn btn-main">
+دخول السيرفر
+</a>
+
+<a href="#apply" class="btn btn-sec">
+ابدأ التقديم
+</a>
+
 </div>
 
 </div>
@@ -358,28 +373,28 @@ display:none;
 
 <section id="features">
 
-<h2 class="section-title">المميزات</h2>
+<h2 class="title">ليش CAPLES X ؟</h2>
 
 <div class="cards">
 
 <div class="card">
-<h3>تصميم فاخر</h3>
+<h3>مجتمع راقي</h3>
 <p>
-واجهة احترافية مستوحاة من مواقع الشركات العالمية والألعاب السينمائية.
+مكان مصمم للأشخاص اللي يدورون على أجواء هادئة، راقية، ومليانة تفاعل حقيقي.
 </p>
 </div>
 
 <div class="card">
-<h3>مجتمع قوي</h3>
+<h3>تصميم أسطوري</h3>
 <p>
-بيئة منظمة واحترافية تضم نخبة من الأعضاء والإدارة.
+واجهة مستوحاة من Discord ولكن بشكل سينمائي فاخر يليق بمجتمع النخبة.
 </p>
 </div>
 
 <div class="card">
-<h3>تقديم احترافي</h3>
+<h3>تجربة مختلفة</h3>
 <p>
-نظام تقديم متطور وسريع مع تجربة استخدام سلسة وفخمة.
+رومات، فعاليات، تفاعل، وقوانين تحافظ على جودة المجتمع بشكل احترافي.
 </p>
 </div>
 
@@ -389,39 +404,39 @@ display:none;
 
 <section id="apply">
 
-<h2 class="section-title">التقديم</h2>
+<h2 class="title">التقديم</h2>
 
-<div class="form-box">
+<div class="apply-box">
 
 <form>
 
-<div class="input-group">
+<div class="input">
 <label>اسمك</label>
 <input type="text" placeholder="اكتب اسمك">
 </div>
 
-<div class="input-group">
+<div class="input">
 <label>ايدي الديسكورد</label>
-<input type="text" placeholder="username#0000">
+<input type="text" placeholder="username">
 </div>
 
-<div class="input-group">
-<label>الرتبة المطلوبة</label>
+<div class="input">
+<label>نوع التقديم</label>
 
 <select>
-<option>مشرف</option>
 <option>إدارة</option>
+<option>إشراف</option>
 <option>دعم فني</option>
 <option>منظم فعاليات</option>
 </select>
 </div>
 
-<div class="input-group">
-<label>لماذا تريد الانضمام؟</label>
-<textarea placeholder="اكتب سبب التقديم..."></textarea>
+<div class="input">
+<label>ليش تبغى تنضم ؟</label>
+<textarea placeholder="اكتب نبذة عنك..."></textarea>
 </div>
 
-<button class="submit-btn">
+<button class="submit">
 إرسال التقديم
 </button>
 
@@ -432,7 +447,9 @@ display:none;
 </section>
 
 <footer>
+
 © 2026 CAPLES X — ALL RIGHTS RESERVED
+
 </footer>
 
 </body>
