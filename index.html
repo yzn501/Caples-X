@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة مواجهة عبدالله - الليدربورد العالمي الحقيقي</title>
+    <title>لعبة مواجهة عبدالله - النسخة الأسطورية المحدثة</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght=400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -78,7 +78,7 @@
             flex: 1.2; min-width: 350px;
             background: rgba(0, 0, 0, 0.6); border-radius: 20px; border: 1px solid rgba(155, 17, 30, 0.2);
             padding: 20px; display: flex; flex-direction: column; align-items: center;
-            position: relative; height: 550px; justify-content: space-between;
+            position: relative; height: 600px; justify-content: space-between;
         }
         .boss-info { width: 100%; text-align: center; }
         .boss-name { font-size: 1.6rem; font-weight: 900; margin-bottom: 8px; color: #fff; }
@@ -92,12 +92,8 @@
         .dummy-hair { width: 86px; height: 30px; background: #111; position: absolute; top: -10px; left: -6px; border-radius: 20px 20px 0 0; }
         .dummy-eye { width: 12px; height: 12px; background: #111; border-radius: 50%; position: absolute; top: 30px; }
         .dummy-eye.left { left: 18px; } .dummy-eye.right { right: 18px; }
-        .dummy-brow { width: 18px; height: 4px; background: #111; position: absolute; top: 22px; }
-        .dummy-brow.left { left: 15px; transform: rotate(-10deg); } .dummy-brow.right { right: 15px; transform: rotate(10deg); }
         .dummy-mouth { width: 30px; height: 8px; background: #555; position: absolute; bottom: 15px; left: 22px; border-radius: 5px; }
         .dummy-body { width: 120px; height: 140px; background: var(--primary); border-radius: 30px 30px 10px 10px; margin: -10px auto 0; border: 3px solid #333; position: relative; z-index: 2; }
-        .dummy-legs { width: 90px; height: 40px; display: flex; justify-content: space-between; margin: 0 auto; }
-        .dummy-leg { width: 25px; height: 100%; background: #222; border: 3px solid #333; border-radius: 0 0 10px 10px; }
 
         .character-dummy.hit-anim { animation: characterPunch 0.15s ease-in-out; }
         @keyframes characterPunch {
@@ -120,21 +116,32 @@
         }
         .victory-toast.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 
-        /* القوائم الجانبية */
+        /* اللوحات الجانبية */
         .side-panels { flex: 1; min-width: 350px; display: flex; flex-direction: column; gap: 20px; }
         .panel { background: var(--panel); border-radius: 20px; padding: 20px; border: 1px solid rgba(155, 17, 30, 0.3); }
         .panel-title { font-size: 1.3rem; font-weight: 900; margin-bottom: 15px; border-bottom: 2px solid var(--primary); padding-bottom: 5px; display: flex; align-items: center; gap: 10px; }
 
-        .shop-list { max-height: 150px; overflow-y: auto; }
-        .upgrade-item { display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.4); padding: 10px; border-radius: 12px; margin-bottom: 8px; }
-        .btn-buy { background: var(--primary); color: #fff; border: none; padding: 6px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        .btn-buy:disabled { background: #333; color: #777; }
+        /* المتجر الكبير جداً والمطور */
+        .shop-list { max-height: 320px; overflow-y: auto; padding-right: 5px; }
+        .shop-list::-webkit-scrollbar { width: 6px; }
+        .shop-list::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+        
+        .upgrade-item { 
+            display: flex; justify-content: space-between; align-items: center; 
+            background: rgba(0,0,0,0.4); padding: 12px; border-radius: 12px; 
+            margin-bottom: 8px; border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+        .upgrade-info h4 { font-size: 1rem; color: #fff; margin-bottom: 2px; }
+        .upgrade-info p { font-size: 0.8rem; color: #aaa; }
+        .upgrade-info p span { color: var(--gold); font-weight: bold; }
+        .btn-buy { background: var(--primary); color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-weight: bold; cursor: pointer; white-space: nowrap; min-width: 80px; }
+        .btn-buy:disabled { background: #333; color: #777; cursor: not-allowed; }
 
         .btn-rebirth { width: 100%; background: linear-gradient(45deg, #0077b6, #00b4d8); color: white; border: none; padding: 12px; border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
 
-        /* ستايل الليدربورد العالمي الجديد */
-        .leaderboard-list { max-height: 250px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
-        .leaderboard-row { display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.4); padding: 10px 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.02); }
+        /* الليدربورد */
+        .leaderboard-list { max-height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
+        .leaderboard-row { display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.4); padding: 10px 15px; border-radius: 10px; }
         .leaderboard-row.my-row { border: 1px solid var(--gold); background: linear-gradient(90deg, rgba(255,183,3,0.1), transparent); }
         .rank-num { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.85rem; font-weight: 900; background: #333; }
         .rank-num.top1 { background: var(--gold); color: #000; }
@@ -147,9 +154,9 @@
 
     <div class="name-modal" id="nameModal">
         <div class="name-box">
-            <h2>🌍 سجل اسمك في ليدربورد العالم!</h2>
-            <p style="color: #bbb; margin-bottom: 15px; font-size: 0.9rem;">اكتب اسمك للمنافسة المباشرة ضد لاعبين حقيقيين من كل مكان:</p>
-            <input type="text" id="usernameInput" placeholder="اسم المستخدم بالإنجليزية أو العربية..." maxlength="14">
+            <h2>🌍 سجل اسمك في ليدربورد الأغنياء!</h2>
+            <p style="color: #bbb; margin-bottom: 15px; font-size: 0.9rem;">اكتب اسمك للمنافسة على لقب أغنى لاعب في العالم:</p>
+            <input type="text" id="usernameInput" placeholder="اسم المستخدم..." maxlength="14">
             <button id="saveNameBtn">دخول التحدي العالمي</button>
         </div>
     </div>
@@ -182,17 +189,9 @@
 
         <div class="side-panels">
             <div class="panel">
-                <div class="panel-title"><i class="fas fa-shopping-basket" style="color:var(--primary)"></i> المتجر السريع</div>
-                <div class="shop-list">
-                    <div class="upgrade-item">
-                        <div><h4>قبضة القوة</h4><p>مستوى: <span id="lvl1">1</span></p></div>
-                        <button class="btn-buy" id="btn1"><span id="cost1">10</span> <i class="fas fa-coins"></i></button>
+                <div class="panel-title"><i class="fas fa-shopping-cart" style="color:var(--primary)"></i> متجر التطويرات الأسطوري (محفوظ)</div>
+                <div class="shop-list" id="shopContainer">
                     </div>
-                    <div class="upgrade-item">
-                        <div><h4>أوتو كليكر</h4><p>مستوى: <span id="lvl2">0</span></p></div>
-                        <button class="btn-buy" id="btn2"><span id="cost2">100</span> <i class="fas fa-coins"></i></button>
-                    </div>
-                </div>
             </div>
 
             <div class="panel" style="padding: 15px;">
@@ -201,7 +200,7 @@
             </div>
 
             <div class="panel">
-                <div class="panel-title"><i class="fas fa-globe-americas" style="color:var(--gold)"></i> متصدري العالم الحقيقيين (مباشر)</div>
+                <div class="panel-title"><i class="fas fa-wallet" style="color:var(--gold)"></i> قائمة أغنى متصدري العالم (كل 5 ثوانٍ)</div>
                 <div class="leaderboard-list" id="globalLeaderboardContainer">
                     <div class="global-loading">جاري الاتصال بالسحابة وجلب المتصدرين...</div>
                 </div>
@@ -210,21 +209,79 @@
     </div>
 
     <script>
-        // رابط قاعدة البيانات السحابية العالمية المجانية المخصصة للعبتك
+        // رابط قاعدة البيانات السحابية العالمية
         const DB_URL = "https://kvdb.io/MN98VjUWhZg1N9n8VfXwY8/boss_game_leaderboard";
 
+        // داتا اللعبة الأساسية (تشمل مستويات وأسعار الـ 10 تطويرات كاملة)
         let game = {
             playerName: "", coins: 0, rebirths: 0, bossLevel: 1, maxHp: 100, currentHp: 100,
-            powers: { click: 1, auto: 0 },
-            levels: { p1: 1, p2: 0 },
-            costs: { p1: 10, p2: 100, rebirth: 15000 }
+            // قوة الضغط الإجمالية، التلقائية، ومضاعف الأموال
+            powers: { click: 1, auto: 0, moneyMult: 1 },
+            // مستويات التطويرات العشرة
+            levels: { p1: 1, p2: 0, p3: 0, p4: 0, p5: 0, p6: 0, p7: 0, p8: 0, p9: 0, p10: 0 },
+            // أسعار التطويرات العشرة الابتدائية
+            costs: { p1: 10, p2: 80, p3: 250, p4: 750, p5: 2000, p6: 6000, p7: 15000, p8: 40000, p9: 100000, p10: 300000, rebirth: 15000 }
         };
 
-        // دالة إرسال التحديث للسحابة بشكل صامت بالخلفية
+        // تعريف الـ 10 تطويرات بشكل منظم لسهولة التعامل والتحديث
+        const shopUpgrades = [
+            { id: 1, key: 'p1', name: 'قبضة حديدية ✊', desc: 'زيادة ضرر الضغطة', add: 1, type: 'click' },
+            { id: 2, key: 'p2', name: 'الخيزرانة المرعبة 🪵', desc: 'زيادة ضرر الضغطة', add: 5, type: 'click' },
+            { id: 3, key: 'p3', name: 'أوتو كليكر بسيط ⚡', desc: 'ضرر تلقائي كل ثانية', add: 2, type: 'auto' },
+            { id: 4, key: 'p4', name: 'سيف التوتش الحاد ⚔️', desc: 'زيادة ضرر الضغطة', add: 25, type: 'click' },
+            { id: 5, key: 'p5', name: 'فزعة قزم محترف 🧝', desc: 'ضرر تلقائي قوي كل ثانية', add: 15, type: 'auto' },
+            { id: 6, key: 'p6', name: 'بطاقة الحظ المضاعفة 🃏', desc: 'مضاعف كوينز إضافي للضربة', add: 0.5, type: 'mult' },
+            { id: 7, key: 'p7', name: 'مطرقة الرعد والبرق 🔨', desc: 'زيادة ضرر الضغطة العنيف', add: 120, type: 'click' },
+            { id: 8, key: 'p8', name: 'روبوت مبرمج مخصص 🤖', desc: 'ضرر تلقائي جبار كل ثانية', add: 80, type: 'auto' },
+            { id: 9, key: 'p9', name: 'استثمار كوينز ذكي 📈', desc: 'مضاعف كوينز ضخم للضربة', add: 1.5, type: 'mult' },
+            { id: 10, key: 'p10', name: 'عقد رعاية أسطوري 💎', desc: 'مضاعف كوينز خارق للطبيعة', add: 4.0, type: 'mult' }
+        ];
+
+        // دالة إنشاء عناصر المتجر داخل الـ HTML تلقائياً
+        function buildShopUI() {
+            const shopContainer = document.getElementById('shopContainer');
+            shopContainer.innerHTML = "";
+            
+            shopUpgrades.forEach(up => {
+                let item = document.createElement('div');
+                item.className = "upgrade-item";
+                item.innerHTML = `
+                    <div class="upgrade-info">
+                        <h4>${up.name}</h4>
+                        <p>${up.desc} <span>+${up.add}</span> (مستوى <span id="lvl${up.id}">0</span>)</p>
+                    </div>
+                    <button class="btn-buy" id="btn${up.id}" onclick="buyUpgrade(${up.id}, '${up.key}', '${up.type}', ${up.add})">
+                        <span id="cost${up.id}">0</span> <i class="fas fa-coins"></i>
+                    </button>
+                `;
+                shopContainer.appendChild(item);
+            });
+        }
+
+        // دالة شراء وتحديث أي تطوير مع الحفظ التلقائي المضمون
+        function buyUpgrade(id, key, type, addValue) {
+            if(game.coins >= game.costs[key]) {
+                game.coins -= game.costs[key];
+                game.levels[key]++;
+                
+                // تطبيق تأثير التطوير بناء على نوعه
+                if(type === 'click') game.powers.click += addValue;
+                else if(type === 'auto') game.powers.auto += addValue;
+                else if(type === 'mult') game.powers.moneyMult += addValue;
+
+                // زيادة سعر التطوير بنسبة تضخمية متوازنة
+                game.costs[key] = Math.floor(game.costs[key] * 1.55);
+                
+                updateUI(); 
+                saveGame(); 
+                uploadToGlobalDatabase();
+            }
+        }
+
+        // رفع البيانات للسحابة
         async function uploadToGlobalDatabase() {
             if(!game.playerName) return;
             try {
-                // إرسال داتا اللاعب الحالي للسحابة العالمية
                 await fetch(`${DB_URL}_${game.playerName}`, {
                     method: 'POST',
                     body: JSON.stringify({ name: game.playerName, rebirths: game.rebirths, coins: Math.floor(game.coins), time: Date.now() })
@@ -232,15 +289,13 @@
             } catch(e) {}
         }
 
-        // دالة جلب كل المتصدرين بالعالم وترتيبهم تلقائياً
+        // تنزيل وترتيب الليدربورد حسب الكوينز
         async function downloadGlobalLeaderboard() {
             try {
-                // جلب كل المفاتيح المسجلة
                 let res = await fetch(`${DB_URL}?prefix=boss_game_leaderboard_`);
                 let keys = await res.json();
                 
                 let allPlayers = [];
-                // قراءة داتا كل لاعب بشكل متوازي وسريع جداً
                 await Promise.all(keys.map(async (key) => {
                     try {
                         let pRes = await fetch(`https://kvdb.io/MN98VjUWhZg1N9n8VfXwY8/${key}`);
@@ -249,18 +304,16 @@
                     } catch(err){}
                 }));
 
-                // ترتيب قائمة العالم تنازلياً حسب الريبرث ثم الكوينز
                 allPlayers.sort((a, b) => {
-                    if (b.rebirths !== a.rebirths) return b.rebirths - a.rebirths;
-                    return b.coins - a.coins;
+                    if (b.coins !== a.coins) return b.coins - a.coins;
+                    return b.rebirths - a.rebirths;
                 });
 
-                // عرض أعلى 10 لاعبين في العالم
                 const container = document.getElementById('globalLeaderboardContainer');
                 container.innerHTML = "";
 
                 if(allPlayers.length === 0) {
-                    container.innerHTML = `<div class="global-loading">أنت أول لاعب عالمي! اضغط وابدأ الصدارة.</div>`;
+                    container.innerHTML = `<div class="global-loading">أنت أول لاعب عالمي! اجمع النقود لتتصدر.</div>`;
                     return;
                 }
 
@@ -274,18 +327,18 @@
                             <div class="rank-num ${rankClass}">${index + 1}</div>
                             <span style="${isMe?'color:var(--gold); font-weight:900;':''}">${user.name} ${isMe?'(أنت)':''}</span>
                         </div>
-                        <div style="font-size:0.85rem; color:#ccc;">ريبيرث: <b style="color:#00b4d8">${user.rebirths}</b> | كوينز: ${user.coins}</div>
+                        <div style="font-size:0.85rem; color:#ccc;">نقود: <b style="color:var(--gold)">${user.coins} كوينز</b> | ريبيرث: ${user.rebirths}</div>
                     `;
                     container.appendChild(row);
                 });
             } catch (err) {
-                document.getElementById('globalLeaderboardContainer').innerHTML = `<div class="global-loading" style="color:var(--secondary)">فشل التحديث المباشر.. جاري إعادة المحاولة</div>`;
+                document.getElementById('globalLeaderboardContainer').innerHTML = `<div class="global-loading" style="color:var(--secondary)">جاري تحديث ليدربورد الأغنياء...</div>`;
             }
         }
 
-        // إعداد وفحص اسم اللاعب الحقيقي
         function initGlobalSystem() {
-            let savedName = localStorage.getItem('global_boss_name');
+            buildShopUI(); // بناء المتجر أولاً
+            let savedName = localStorage.getItem('global_boss_name_v3');
             if(!savedName) {
                 document.getElementById('nameModal').classList.remove('hidden');
             } else {
@@ -299,21 +352,22 @@
         document.getElementById('saveNameBtn').addEventListener('click', () => {
             let nameVal = document.getElementById('usernameInput').value.replace(/[^a-zA-Z0-9أ-ي_\s]/g, "").trim();
             if(nameVal.length >= 2) {
-                localStorage.setItem('global_boss_name', nameVal);
+                localStorage.setItem('global_boss_name_v3', nameVal);
                 game.playerName = nameVal;
                 document.getElementById('nameModal').classList.add('hidden');
                 document.getElementById('displayPlayerName').innerText = game.playerName;
                 loadGame();
                 uploadToGlobalDatabase().then(() => downloadGlobalLeaderboard());
             } else {
-                alert("اكتب اسم من حرفين أو أكثر وبدون رموز غريبة!");
+                alert("اكتب اسم من حرفين أو أكثر!");
             }
         });
 
+        // دالة الحفظ والقراءة الحديدية من جهاز اللاعب لضمان عدم ضياع أي شيء
         function loadGame() {
-            if(localStorage.getItem('global_game_save')) {
-                game = JSON.parse(localStorage.getItem('global_game_save'));
-                game.playerName = localStorage.getItem('global_boss_name');
+            if(localStorage.getItem('global_game_save_v3')) {
+                game = JSON.parse(localStorage.getItem('global_game_save_v3'));
+                game.playerName = localStorage.getItem('global_boss_name_v3');
                 game.currentHp = game.maxHp;
             }
             updateUI();
@@ -321,7 +375,7 @@
         }
 
         function saveGame() {
-            localStorage.setItem('global_game_save', JSON.stringify(game));
+            localStorage.setItem('global_game_save_v3', JSON.stringify(game));
         }
 
         function updateUI() {
@@ -329,11 +383,12 @@
             document.getElementById('bossLvl').innerText = game.bossLevel;
             document.getElementById('rebirths').innerText = game.rebirths;
 
-            for(let i=1; i<=2; i++) {
-                document.getElementById('lvl'+i).innerText = game.levels['p'+i];
-                document.getElementById('cost'+i).innerText = game.costs['p'+i];
-                document.getElementById('btn'+i).disabled = game.coins < game.costs['p'+i];
-            }
+            // تحديث واجهة أزرار ومستويات المتجر العشرة كاملاً
+            shopUpgrades.forEach(up => {
+                document.getElementById('lvl' + up.id).innerText = game.levels[up.key];
+                document.getElementById('cost' + up.id).innerText = game.costs[up.key];
+                document.getElementById('btn' + up.id).disabled = game.coins < game.costs[up.key];
+            });
 
             document.getElementById('rebirthCost').innerText = game.costs.rebirth;
             document.getElementById('btnRebirth').disabled = game.coins < game.costs.rebirth;
@@ -355,50 +410,40 @@
                 game.bossLevel++;
                 game.maxHp = Math.floor(game.maxHp * 1.45);
                 game.currentHp = game.maxHp;
-                uploadToGlobalDatabase(); // مزامنة فورية عند الفوز بالليفل
+                uploadToGlobalDatabase(); 
             }
         }
 
+        // عند الضغط على عبدالله لتوجيه ضربة
         document.getElementById('abdullah').addEventListener('click', () => {
             let dmg = game.powers.click * (1 + game.rebirths);
             game.currentHp -= dmg;
-            game.coins += dmg * (1 + game.rebirths);
+            
+            // حساب الأرباح بناءً على قوة الضربة مضروبة بمضاعف الفلوس والريبيرة
+            let earnings = dmg * game.powers.moneyMult * (1 + game.rebirths);
+            game.coins += earnings;
 
             document.getElementById('abdullah').classList.add('hit-anim');
             setTimeout(() => document.getElementById('abdullah').classList.remove('hit-anim'), 120);
 
-            // رقم الضرر السريع
-            const pop = document.createElement('div'); pop.className = 'dmg-pop'; pop.innerText = `-${dmg}`;
+            const pop = document.createElement('div'); pop.className = 'dmg-pop'; pop.innerText = `+${Math.floor(earnings)}`;
             pop.style.left = `calc(50% + ${Math.random()*40-20}px)`; pop.style.top = `45%`;
             document.querySelector('.game-screen').appendChild(pop); setTimeout(() => pop.remove(), 550);
 
             checkDeath(); updateUI(); saveGame();
         });
 
-        // الشراء والترقية
-        function setupBtn(num, key, action) {
-            document.getElementById('btn'+num).addEventListener('click', (e) => {
-                e.stopPropagation();
-                if(game.coins >= game.costs[key]) {
-                    game.coins -= game.costs[key]; game.levels[key]++; action();
-                    game.costs[key] = Math.floor(game.costs[key] * 1.55);
-                    updateUI(); saveGame(); uploadToGlobalDatabase();
-                }
-            });
-        }
-        setupBtn(1, 'p1', () => { game.powers.click += 1; });
-        setupBtn(2, 'p2', () => { game.powers.auto += 2; });
-
-        // زر الريبيرث
+        // زر إعادة الميلاد (الريبيرث)
         document.getElementById('btnRebirth').addEventListener('click', () => {
             if(game.coins >= game.costs.rebirth) {
                 game.rebirths++;
+                // تصفير النقود والمستويات لبدء ريبرث أقوى بمضاعفات أعلى
                 game.coins = 0; game.bossLevel = 1; game.maxHp = 100; game.currentHp = 100;
-                game.powers = { click: 1, auto: 0 }; game.levels = { p1: 1, p2: 0 };
-                game.costs = { p1: 10, p2: 100, rebirth: Math.floor(game.costs.rebirth * 2.5) };
+                game.powers = { click: 1, auto: 0, moneyMult: 1 };
+                game.levels = { p1: 1, p2: 0, p3: 0, p4: 0, p5: 0, p6: 0, p7: 0, p8: 0, p9: 0, p10: 0 };
+                game.costs = { p1: 10, p2: 80, p3: 250, p4: 750, p5: 2000, p6: 6000, p7: 15000, p8: 40000, p9: 100000, p10: 300000, rebirth: Math.floor(game.costs.rebirth * 2.5) };
                 
-                document.getElementById('victoryTitle').innerText = "👑 ريبيرث عالمي!";
-                document.getElementById('victoryReward').innerText = `انتقلت للمستوى السحابي رقم ${game.rebirths}`;
+                document.getElementById('victoryTitle').innerText = "👑 ريبيرث جديد!";
                 document.getElementById('victoryToast').classList.add('show');
                 setTimeout(() => { document.getElementById('victoryToast').classList.remove('show'); }, 2000);
 
@@ -407,19 +452,20 @@
             }
         });
 
-        // حلقة الأوتو كليكر وتحديث داتا العالم بشكل مستمر وتلقائي
+        // حلقة الضرر والأرباح التلقائية التابعة لترقيات المتجر
         setInterval(() => {
             if(game.powers.auto > 0) {
                 game.currentHp -= game.powers.auto * (1 + game.rebirths);
-                game.coins += game.powers.auto * (1 + game.rebirths);
+                game.coins += game.powers.auto * game.powers.moneyMult * (1 + game.rebirths);
                 checkDeath(); updateUI(); saveGame();
             }
         }, 1000);
 
-        // تحديث الصدارة العالمية تلقائياً كل 10 ثوانٍ عشان تشوف المنافسين وهم يلعبون!
-        setInterval(() => { downloadGlobalLeaderboard(); }, 10000);
-        // رفع النقاط بشكل دوري صامت
-        setInterval(() => { uploadToGlobalDatabase(); }, 25000);
+        // تحديث الليدربورد العالمي كل 5 ثوانٍ بالضبط
+        setInterval(() => { downloadGlobalLeaderboard(); }, 5000);
+        
+        // مزامنة احتياطية صامتة بالسحاب كل 15 ثانية لضمان الحفظ الدائم
+        setInterval(() => { uploadToGlobalDatabase(); }, 15000);
 
         initGlobalSystem();
     </script>
