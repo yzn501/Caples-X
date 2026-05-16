@@ -31,21 +31,40 @@
         .hero { 
             height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; 
             text-align: center; background: radial-gradient(circle at center, #2b0b10 0%, var(--bg) 70%); 
-            position: relative; overflow: hidden;
+            position: relative; overflow: hidden; padding: 0 20px;
         }
         
         .hero h1 { font-size: 5rem; font-weight: 900; margin-bottom: 20px; text-shadow: 0 0 25px rgba(217, 4, 41, 0.6); z-index: 10; }
         .hero p { font-size: 1.5rem; color: #adb5bd; max-width: 650px; margin-bottom: 40px; line-height: 1.6; z-index: 10; }
         
+        /* منطقة الأزرار الرئيسية */
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            z-index: 10;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
         .btn { 
-            padding: 15px 45px; font-size: 1.3rem; font-weight: bold; background: linear-gradient(45deg, var(--primary), var(--secondary)); 
-            color: white; border: none; border-radius: 50px; cursor: pointer; text-decoration: none; 
-            transition: all 0.4s ease; box-shadow: 0 0 20px rgba(155, 17, 30, 0.6); z-index: 10; display: flex; align-items: center; gap: 10px;
+            padding: 15px 35px; font-size: 1.2rem; font-weight: bold; color: white; border: none; border-radius: 50px; cursor: pointer; text-decoration: none; 
+            transition: all 0.4s ease; display: flex; align-items: center; gap: 10px;
         }
         
-        .btn:hover { transform: scale(1.08) translateY(-5px); box-shadow: 0 10px 30px rgba(217, 4, 41, 0.9); }
+        .btn-discord {
+            background: linear-gradient(45deg, var(--primary), var(--secondary)); 
+            box-shadow: 0 0 20px rgba(155, 17, 30, 0.6);
+        }
+        .btn-discord:hover { transform: scale(1.08) translateY(-5px); box-shadow: 0 10px 30px rgba(217, 4, 41, 0.9); }
 
-        /* قسم استمارة التعارف */
+        .btn-form {
+            background: transparent;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 10px rgba(155, 17, 30, 0.2);
+        }
+        .btn-form:hover { background: var(--primary); transform: scale(1.08) translateY(-5px); box-shadow: 0 10px 30px rgba(155, 17, 30, 0.5); }
+
+        /* قسم استمارة التقديم الشاملة */
         .matchmaking {
             padding: 100px 20px; text-align: center; background: #161a1d; border-top: 5px solid var(--primary);
         }
@@ -55,22 +74,25 @@
         .matchmaking p { color: #adb5bd; margin-bottom: 40px; font-size: 1.2rem; }
 
         .form-container {
-            max-width: 500px; margin: 0 auto; background: #0b090a; padding: 40px; border-radius: 20px;
+            max-width: 600px; margin: 0 auto; background: #0b090a; padding: 40px; border-radius: 20px;
             box-shadow: 0 0 30px rgba(0,0,0,0.5); border: 1px solid rgba(155, 17, 30, 0.3);
         }
 
         .form-group { margin-bottom: 25px; text-align: right; }
         .form-group label { display: block; margin-bottom: 10px; font-weight: bold; color: var(--secondary); }
-        .form-group input, .form-group textarea {
+        
+        .form-group input, .form-group textarea, .form-group select {
             width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #333; background: #1a1d20;
             color: white; font-size: 1rem; outline: none; transition: 0.3s;
         }
-        .form-group input:focus, .form-group textarea:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(155, 17, 30, 0.5); }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { 
+            border-color: var(--primary); box-shadow: 0 0 10px rgba(155, 17, 30, 0.5); 
+        }
         .form-group textarea { resize: none; height: 100px; }
         
         .submit-btn {
             width: 100%; padding: 15px; font-size: 1.2rem; font-weight: bold; background: var(--primary); color: white;
-            border: none; border-radius: 10px; cursor: pointer; transition: 0.3s;
+            border: none; border-radius: 10px; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 10px;
         }
         .submit-btn:hover { background: var(--secondary); }
 
@@ -88,29 +110,46 @@
 
     <section class="hero">
         <h1>𝑪𝒐𝒖𝒑𝒍𝒆𝒔 𝑿</h1>
-        <p>المكان الذي تلتقي فيه القلوب. انضم إلى أفخم مجتمع ديسكورد للتعارف وتكوين صداقات حقيقية في بيئة راقية.</p>
-        <a href="https://discord.gg/EqHBZjSeC" class="btn" target="_blank"><i class="fab fa-discord"></i> انضم للسيرفر الآن</a>
+        <p>المكان الفخم الذي تلتقي فيه القلوب. اختر طريقك الآن لتكون جزءاً من مجتمعنا الراقي.</p>
+        
+        <div class="cta-buttons">
+            <a href="https://discord.gg/EqHBZjSeC" class="btn btn-discord" target="_blank"><i class="fab fa-discord"></i> دخول السيرفر فوراً</a>
+            <a href="#join-form" class="btn btn-form"><i class="fas fa-file-signature"></i> تقديم طلب تعارف</a>
+        </div>
     </section>
 
     <section class="matchmaking" id="join-form">
-        <h2>بوابة <span>التعارف</span></h2>
-        <p>قدم نبذة عنك وبتوصل رسالتك لروم التعارف الخاص بالسيرفر مباشرة!</p>
+        <h2>إستمارة <span>الطلب والتعارف</span></h2>
+        <p>املأ بياناتك واكتب رغباتك لتوثيق حسابك وإرسالها لروم التعارف التلقائي!</p>
         
         <div class="form-container">
             <form id="discordForm">
                 <div class="form-group">
-                    <label><i class="fas fa-user"></i> اسمك أو لقبك:</label>
-                    <input type="text" id="userName" placeholder="اكتب اسمك هنا..." required>
+                    <label><i class="fas fa-id-card"></i> الاسم أو اللقب:</label>
+                    <input type="text" id="userName" placeholder="مثال: خالد / لينا" required>
                 </div>
+                
                 <div class="form-group">
-                    <label><i class="fas fa-calendar-alt"></i> العمر:</label>
-                    <input type="number" id="userAge" placeholder="كم عمرك؟" required>
+                    <label><i class="fas fa-calendar-day"></i> العمر:</label>
+                    <input type="number" id="userAge" placeholder="اكتب عمرك هنا..." required>
                 </div>
+
                 <div class="form-group">
-                    <label><i class="fas fa-comment-dots"></i> نبذة عنك (وش تبحث عنه؟):</label>
-                    <textarea id="userBio" placeholder="تكلم عن نفسك شوي..." required></textarea>
+                    <label><i class="fas fa-at"></i> حساباتك (يوزر الديسكورد + حساباتك الأخرى):</label>
+                    <input type="text" id="userAccounts" placeholder="مثال: Discord: khaled#0 | Insta: @..." required>
                 </div>
-                <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> إرسال الطلب للسيرفر</button>
+
+                <div class="form-group">
+                    <label><i class="fas fa-star"></i> رغباتك ومواصفات الطرف الآخر:</label>
+                    <textarea id="userWishes" placeholder="وش المواصفات أو الرغبات اللي تبحث عنها في شريكك؟" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-heart"></i> نبذة عنك واهتماماتك الشخصية:</label>
+                    <textarea id="userBio" placeholder="تكلم عن نفسك، هواياتك، وش تحب وتكره..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn"><i class="fas fa-share-square"></i> إرسال الطلب مباشرة للسيرفر</button>
             </form>
         </div>
     </section>
@@ -120,7 +159,7 @@
     </footer>
 
     <script>
-        // تأثير القلوب
+        // تأثير القلوب بالخلفية
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart-particle');
@@ -133,26 +172,30 @@
         }
         setInterval(createHeart, 400);
 
-        // سكربت إرسال البيانات للديسكورد عبر الـ Webhook المربوط
+        // نظام إرسال البيانات للويب هوك
         document.getElementById('discordForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const name = document.getElementById('userName').value;
             const age = document.getElementById('userAge').value;
+            const accounts = document.getElementById('userAccounts').value;
+            const wishes = document.getElementById('userWishes').value;
             const bio = document.getElementById('userBio').value;
 
             const webhookURL = "https://discord.com/api/webhooks/1505269322006790306/vv4S6OEX0xU8oC2dpS83qnrM1Bu83d4KWvCpv82Osw9eDXQVuTEDgB5_AYp4icRk0lfP"; 
 
             const payload = {
                 embeds: [{
-                    title: "💌 طلب تعارف جديد من الموقع!",
+                    title: "👑 طلب توثيق وتعارف جديد!",
                     color: 10162462, 
                     fields: [
                         { name: "👤 الاسم/اللقب", value: name, inline: true },
                         { name: "📅 العمر", value: age, inline: true },
-                        { name: "💬 النبذة", value: bio }
+                        { name: "🔗 حسابات الشخص", value: accounts },
+                        { name: "✨ الرغبات والمواصفات المطلوبة", value: wishes },
+                        { name: "💬 نبذة واهتمامات", value: bio }
                     ],
-                    footer: { text: "مرسل من موقع 𝑪𝒐𝒖𝒑𝒍𝒆𝒔 𝑿" },
+                    footer: { text: "بوابة 𝑪𝒐𝒖𝒑𝒍𝒆𝒔 𝑿 الإلكترونية" },
                     timestamp: new Date().toISOString()
                 }]
             };
@@ -164,14 +207,14 @@
             })
             .then(response => {
                 if(response.ok) {
-                    alert('تم إرسال طلبك للسيرفر بنجاح! شكراً لك.');
+                    alert('يا مـلك! تم إرسال طلبك بنجاح ووصل للروم بالديسكورد.');
                     document.getElementById('discordForm').reset();
                 } else {
-                    alert('في مشكلة بالويب هوك، تأكد من الإعدادات بالديسكورد.');
+                    alert('فيه مشكلة بسيطة بالويب هوك، تأكد من صلاحياته بالديسكورد.');
                 }
             })
             .catch(error => {
-                alert('حدث خطأ أثناء الإرسال، حاول مرة ثانية.');
+                alert('حدث خطأ بالشبكة، حاول مجدداً.');
             });
         });
     </script>
