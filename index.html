@@ -1,13 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>CAPLES X</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<title>يزن عم عبدالله</title>
 
 <style>
 
@@ -15,442 +12,341 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Cairo',sans-serif;
-scroll-behavior:smooth;
+font-family:Arial;
 }
 
 body{
-background:#0b0b0f;
-overflow-x:hidden;
+background:#111;
 color:white;
+overflow:hidden;
 }
 
-/* خلفية */
-body::before{
-content:'';
-position:fixed;
+h1{
+position:absolute;
+top:20px;
 width:100%;
-height:100%;
-top:0;
-left:0;
-background:
-linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.92)),
-url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=2070&auto=format&fit=crop');
-background-size:cover;
-background-position:center;
-z-index:-3;
-animation:bg 15s infinite alternate;
-}
-
-@keyframes bg{
-from{
-transform:scale(1);
-}
-to{
-transform:scale(1.08);
-}
-}
-
-/* تأثيرات */
-.blur{
-position:fixed;
-width:500px;
-height:500px;
-background:#ff4d88;
-filter:blur(180px);
-opacity:.15;
-border-radius:50%;
-z-index:-2;
-animation:move 8s infinite alternate;
-}
-
-.blur2{
-right:0;
-bottom:0;
-background:#ffffff;
-}
-
-@keyframes move{
-from{
-transform:translateY(0);
-}
-to{
-transform:translateY(100px);
-}
-}
-
-/* هيدر */
-header{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-padding:22px 8%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-backdrop-filter:blur(12px);
-background:rgba(255,255,255,.03);
-border-bottom:1px solid rgba(255,255,255,.08);
-z-index:999;
-}
-
-.logo{
-font-size:32px;
+text-align:center;
+font-size:70px;
+color:white;
+text-shadow:0 0 20px red;
 font-weight:900;
-letter-spacing:5px;
-color:white;
-text-shadow:0 0 25px rgba(255,255,255,.3);
+z-index:100;
 }
 
-nav a{
-color:white;
-text-decoration:none;
-margin:0 15px;
-font-weight:600;
-transition:.3s;
+#coins{
+position:absolute;
+top:120px;
+right:30px;
+font-size:30px;
+background:#222;
+padding:10px 20px;
+border-radius:20px;
 }
 
-nav a:hover{
-color:#ff4d88;
+#shop{
+position:absolute;
+left:20px;
+top:120px;
+width:250px;
+background:#1a1a1a;
+padding:20px;
+border-radius:20px;
+border:2px solid #333;
 }
 
-/* الصفحة الرئيسية */
-.hero{
+#shop h2{
+margin-bottom:20px;
+}
+
+.upgrade{
+background:#222;
+padding:15px;
+margin-bottom:15px;
+border-radius:15px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.upgrade:hover{
+background:#333;
+transform:scale(1.05);
+}
+
+#game{
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-text-align:center;
-padding:0 20px;
 }
 
-.hero-content{
-max-width:900px;
+.character{
+position:relative;
+width:240px;
+height:500px;
+cursor:pointer;
+transition:0.1s;
 }
 
-.hero-content h1{
-font-size:110px;
-font-weight:900;
-letter-spacing:10px;
-margin-bottom:20px;
-text-shadow:0 0 40px rgba(255,255,255,.35);
-animation:fade 1s ease;
+.head{
+width:130px;
+height:130px;
+background:#f1c27d;
+border-radius:50%;
+margin:auto;
+position:relative;
 }
 
-.hero-content p{
-font-size:24px;
-line-height:2;
-opacity:.85;
-animation:fade 1.5s ease;
+.eye{
+width:14px;
+height:14px;
+background:black;
+border-radius:50%;
+position:absolute;
+top:45px;
 }
 
-.hero-buttons{
-margin-top:50px;
+.eye1{left:35px;}
+.eye2{right:35px;}
+
+.mouth{
+width:50px;
+height:10px;
+background:black;
+position:absolute;
+bottom:35px;
+left:50%;
+transform:translateX(-50%);
+border-radius:20px;
+}
+
+.body{
+width:180px;
+height:220px;
+background:#222;
+margin:0 auto;
+border-radius:30px;
 display:flex;
 justify-content:center;
-gap:20px;
-flex-wrap:wrap;
-}
-
-.btn{
-padding:18px 45px;
-border-radius:60px;
-font-size:18px;
-font-weight:800;
-text-decoration:none;
-transition:.4s;
-}
-
-.btn-main{
-background:linear-gradient(45deg,#ff4d88,#ff8fab);
-color:white;
-box-shadow:0 0 25px rgba(255,77,136,.5);
-}
-
-.btn-main:hover{
-transform:translateY(-5px) scale(1.05);
-}
-
-.btn-sec{
-border:1px solid rgba(255,255,255,.2);
-color:white;
-background:rgba(255,255,255,.05);
-backdrop-filter:blur(10px);
-}
-
-.btn-sec:hover{
-background:white;
-color:black;
-}
-
-/* أقسام */
-section{
-padding:130px 10%;
-}
-
-.title{
-font-size:55px;
+align-items:center;
+font-size:40px;
 font-weight:900;
-text-align:center;
-margin-bottom:70px;
 }
 
-/* بطاقات */
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:30px;
-}
-
-.card{
-background:rgba(255,255,255,.05);
-padding:45px;
+.arm{
+width:40px;
+height:170px;
+background:#f1c27d;
+position:absolute;
+top:150px;
 border-radius:30px;
-backdrop-filter:blur(14px);
-border:1px solid rgba(255,255,255,.08);
-transition:.4s;
 }
 
-.card:hover{
-transform:translateY(-10px);
-background:rgba(255,255,255,.08);
+.arm1{left:0;}
+.arm2{right:0;}
+
+.leg{
+width:50px;
+height:180px;
+background:#444;
+position:absolute;
+bottom:0;
+border-radius:30px;
 }
 
-.card h3{
-font-size:28px;
-margin-bottom:20px;
+.leg1{left:60px;}
+.leg2{right:60px;}
+
+.hit{
+animation:hitAnim 0.2s;
 }
 
-.card p{
-opacity:.8;
-line-height:1.9;
+@keyframes hitAnim{
+0%{transform:translateX(0) rotate(0deg);}
+25%{transform:translateX(-20px) rotate(-5deg);}
+50%{transform:translateX(20px) rotate(5deg);}
+100%{transform:translateX(0) rotate(0deg);}
 }
 
-/* التقديم */
-.apply-box{
-max-width:800px;
-margin:auto;
-background:rgba(255,255,255,.05);
-padding:50px;
-border-radius:35px;
-border:1px solid rgba(255,255,255,.08);
-backdrop-filter:blur(16px);
+.blood{
+position:absolute;
+width:12px;
+height:12px;
+background:red;
+border-radius:50%;
+pointer-events:none;
+animation:fall 1s linear forwards;
 }
 
-.input{
-margin-bottom:25px;
-}
-
-.input label{
-display:block;
-margin-bottom:12px;
-font-weight:700;
-}
-
-.input input,
-.input textarea,
-.input select{
-width:100%;
-padding:18px;
-background:rgba(255,255,255,.06);
-border:none;
-border-radius:18px;
-color:white;
-font-size:16px;
-outline:none;
-}
-
-textarea{
-height:160px;
-resize:none;
-}
-
-.submit{
-width:100%;
-padding:18px;
-border:none;
-border-radius:18px;
-background:linear-gradient(45deg,#ff4d88,#ff8fab);
-color:white;
-font-size:18px;
-font-weight:900;
-cursor:pointer;
-transition:.3s;
-}
-
-.submit:hover{
-transform:scale(1.02);
-box-shadow:0 0 30px rgba(255,77,136,.5);
-}
-
-/* فوتر */
-footer{
-padding:40px;
-text-align:center;
-border-top:1px solid rgba(255,255,255,.08);
-background:rgba(255,255,255,.03);
-}
-
-/* أنيميشن */
-@keyframes fade{
-from{
-opacity:0;
-transform:translateY(40px);
-}
-to{
+@keyframes fall{
+0%{
 opacity:1;
 transform:translateY(0);
 }
+100%{
+opacity:0;
+transform:translateY(150px);
+}
 }
 
-@media(max-width:768px){
-
-.hero-content h1{
-font-size:65px;
-}
-
-.hero-content p{
-font-size:18px;
-}
-
-.title{
-font-size:40px;
-}
-
-nav{
+#cry{
+position:absolute;
+bottom:80px;
+font-size:50px;
 display:none;
 }
 
+#power{
+position:absolute;
+bottom:20px;
+width:100%;
+text-align:center;
+font-size:35px;
 }
 
 </style>
 </head>
-
 <body>
 
-<div class="blur"></div>
-<div class="blur blur2"></div>
+<h1>يزن عم عبدالله 😈</h1>
 
-<header>
+<div id="coins">💰 0</div>
 
-<div class="logo">CAPLES X</div>
+<div id="shop">
+<h2>التطويرات 🔥</h2>
 
-<nav>
-<a href="#">الرئيسية</a>
-<a href="#features">المميزات</a>
-<a href="#apply">التقديم</a>
-</nav>
+<div class="upgrade" onclick="buyUpgrade(10,1)">
+👊 لكمة قوية - 10 كوين
+</div>
 
-</header>
+<div class="upgrade" onclick="buyUpgrade(50,5)">
+💥 ضربة خارقة - 50 كوين
+</div>
 
-<section class="hero">
-
-<div class="hero-content">
-
-<h1>CAPLES X</h1>
-
-<p>
-أكبر مجتمع حب وتعارف احترافي بتجربة فاخرة مستوحاة من تصميم Discord
-لكن بعالم مختلف مليء بالمشاعر، الفخامة، والأجواء الراقية.
-</p>
-
-<div class="hero-buttons">
-
-<a href="https://discord.gg/Yf5JBGyrp" class="btn btn-main">
-دخول السيرفر
-</a>
-
-<a href="#apply" class="btn btn-sec">
-ابدأ التقديم
-</a>
-
+<div class="upgrade" onclick="buyUpgrade(100,10)">
+☠️ مود الوحش - 100 كوين
 </div>
 
 </div>
 
-</section>
+<div id="game">
 
-<section id="features">
+<div class="character" id="char">
 
-<h2 class="title">ليش CAPLES X ؟</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>مجتمع راقي</h3>
-<p>
-مكان مصمم للأشخاص اللي يدورون على أجواء هادئة، راقية، ومليانة تفاعل حقيقي.
-</p>
+<div class="head">
+<div class="eye eye1"></div>
+<div class="eye eye2"></div>
+<div class="mouth"></div>
 </div>
 
-<div class="card">
-<h3>تصميم أسطوري</h3>
-<p>
-واجهة مستوحاة من Discord ولكن بشكل سينمائي فاخر يليق بمجتمع النخبة.
-</p>
+<div class="arm arm1"></div>
+<div class="arm arm2"></div>
+
+<div class="body">
+عبدالله
 </div>
 
-<div class="card">
-<h3>تجربة مختلفة</h3>
-<p>
-رومات، فعاليات، تفاعل، وقوانين تحافظ على جودة المجتمع بشكل احترافي.
-</p>
-</div>
+<div class="leg leg1"></div>
+<div class="leg leg2"></div>
 
 </div>
 
-</section>
-
-<section id="apply">
-
-<h2 class="title">التقديم</h2>
-
-<div class="apply-box">
-
-<form>
-
-<div class="input">
-<label>اسمك</label>
-<input type="text" placeholder="اكتب اسمك">
-</div>
-
-<div class="input">
-<label>ايدي الديسكورد</label>
-<input type="text" placeholder="username">
-</div>
-
-<div class="input">
-<label>نوع التقديم</label>
-
-<select>
-<option>إدارة</option>
-<option>إشراف</option>
-<option>دعم فني</option>
-<option>منظم فعاليات</option>
-</select>
-</div>
-
-<div class="input">
-<label>ليش تبغى تنضم ؟</label>
-<textarea placeholder="اكتب نبذة عنك..."></textarea>
-</div>
-
-<button class="submit">
-إرسال التقديم
-</button>
-
-</form>
+<div id="cry">😭</div>
 
 </div>
 
-</section>
+<div id="power">
+قوة الضربة: <span id="damage">1</span>
+</div>
 
-<footer>
+<audio id="hitSound" src="https://www.soundjay.com/human/slap-01.mp3"></audio>
 
-© 2026 CAPLES X — ALL RIGHTS RESERVED
+<script>
 
-</footer>
+let coins = 0;
+let damage = 1;
+
+const char = document.getElementById('char');
+const cry = document.getElementById('cry');
+const coinsText = document.getElementById('coins');
+const damageText = document.getElementById('damage');
+const sound = document.getElementById('hitSound');
+
+char.addEventListener('click', function(e){
+
+coins += damage;
+coinsText.innerHTML = `💰 ${coins}`;
+
+char.classList.add('hit');
+
+setTimeout(()=>{
+char.classList.remove('hit');
+},200);
+
+cry.style.display = 'block';
+
+setTimeout(()=>{
+cry.style.display = 'none';
+},500);
+
+for(let i=0;i<6;i++){
+
+let blood = document.createElement('div');
+blood.classList.add('blood');
+
+blood.style.left = e.pageX + (Math.random()*50-25) + 'px';
+blood.style.top = e.pageY + 'px';
+
+document.body.appendChild(blood);
+
+setTimeout(()=>{
+blood.remove();
+},1000);
+
+}
+
+sound.currentTime = 0;
+sound.play();
+
+});
+
+function buyUpgrade(price,power){
+
+if(coins >= price){
+coins -= price;
+damage += power;
+
+coinsText.innerHTML = `💰 ${coins}`;
+damageText.innerHTML = damage;
+
+alert('تم شراء التطوير 🔥');
+
+}else{
+alert('ما عندك كوين كفاية 😂');
+}
+
+}
+
+</script>
 
 </body>
 </html>
+```
+
+## طريقة التشغيل
+
+1. انسخ الكود كامل.
+2. افتح VS Code أو أي محرر.
+3. سوي ملف اسمه index.html
+4. الصق الكود.
+5. شغل الملف بالمتصفح.
+
+تقدر بعد تضيف:
+
+* عداد HP
+* زعماء
+* أسلحة
+* مؤثرات شاشة
+* أصوات أقوى
+* متجر سكنات
+* نظام لفل
+* كومبو
