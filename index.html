@@ -8,195 +8,76 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* إعدادات الألوان والتصميم الأساسي */
         :root {
-            --primary: #9b111e; /* أحمر غامق فخم */
+            --primary: #9b111e; 
             --secondary: #d90429;
-            --bg: #0b090a; /* أسود عميق */
+            --bg: #0b090a; 
             --text: #f8f9fa;
         }
         
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-            font-family: 'Tajawal', sans-serif; 
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; scroll-behavior: smooth; }
         
-        body { 
-            background-color: var(--bg); 
-            color: var(--text); 
-            overflow-x: hidden; 
-        }
+        body { background-color: var(--bg); color: var(--text); overflow-x: hidden; }
 
-        /* شريط التنقل العلوي */
         nav { 
-            padding: 20px 50px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            background: rgba(11, 9, 10, 0.8); 
-            position: fixed; 
-            width: 100%; 
-            z-index: 100; 
-            backdrop-filter: blur(15px); 
-            border-bottom: 1px solid rgba(155, 17, 30, 0.2);
+            padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; 
+            background: rgba(11, 9, 10, 0.8); position: fixed; width: 100%; z-index: 100; 
+            backdrop-filter: blur(15px); border-bottom: 1px solid rgba(155, 17, 30, 0.2);
         }
         
-        .logo { 
-            font-size: 32px; 
-            font-weight: 900; 
-            letter-spacing: 2px; 
-            text-shadow: 0 0 10px rgba(155, 17, 30, 0.5);
-        }
+        .logo { font-size: 32px; font-weight: 900; letter-spacing: 2px; text-shadow: 0 0 10px rgba(155, 17, 30, 0.5); }
         .logo span { color: var(--primary); }
 
-        /* القسم الرئيسي (الهيرو) */
         .hero { 
-            height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            text-align: center; 
-            background: radial-gradient(circle at center, #2b0b10 0%, var(--bg) 70%); 
-            position: relative; 
-            overflow: hidden;
+            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            text-align: center; background: radial-gradient(circle at center, #2b0b10 0%, var(--bg) 70%); 
+            position: relative; overflow: hidden;
         }
         
-        .hero h1 { 
-            font-size: 5rem; 
-            font-weight: 900; 
-            margin-bottom: 20px; 
-            text-shadow: 0 0 25px rgba(217, 4, 41, 0.6); 
-            z-index: 10;
-        }
+        .hero h1 { font-size: 5rem; font-weight: 900; margin-bottom: 20px; text-shadow: 0 0 25px rgba(217, 4, 41, 0.6); z-index: 10; }
+        .hero p { font-size: 1.5rem; color: #adb5bd; max-width: 650px; margin-bottom: 40px; line-height: 1.6; z-index: 10; }
         
-        .hero p { 
-            font-size: 1.5rem; 
-            color: #adb5bd; 
-            max-width: 650px; 
-            margin-bottom: 40px; 
-            line-height: 1.6;
-            z-index: 10;
-        }
-        
-        /* زر الديسكورد */
         .btn { 
-            padding: 15px 45px; 
-            font-size: 1.3rem; 
-            font-weight: bold; 
-            background: linear-gradient(45deg, var(--primary), var(--secondary)); 
-            color: white; 
-            border: none; 
-            border-radius: 50px; 
-            cursor: pointer; 
-            text-decoration: none; 
-            transition: all 0.4s ease; 
-            box-shadow: 0 0 20px rgba(155, 17, 30, 0.6); 
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            padding: 15px 45px; font-size: 1.3rem; font-weight: bold; background: linear-gradient(45deg, var(--primary), var(--secondary)); 
+            color: white; border: none; border-radius: 50px; cursor: pointer; text-decoration: none; 
+            transition: all 0.4s ease; box-shadow: 0 0 20px rgba(155, 17, 30, 0.6); z-index: 10; display: flex; align-items: center; gap: 10px;
         }
         
-        .btn:hover { 
-            transform: scale(1.08) translateY(-5px); 
-            box-shadow: 0 10px 30px rgba(217, 4, 41, 0.9); 
+        .btn:hover { transform: scale(1.08) translateY(-5px); box-shadow: 0 10px 30px rgba(217, 4, 41, 0.9); }
+
+        /* قسم استمارة التعارف (الجديد) */
+        .matchmaking {
+            padding: 100px 20px; text-align: center; background: #161a1d; border-top: 5px solid var(--primary);
         }
 
-        /* قسم المميزات */
-        .features { 
-            padding: 100px 20px; 
-            text-align: center; 
-            background: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239b111e" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
-        }
-        
-        .features h2 { 
-            font-size: 3rem; 
-            margin-bottom: 60px; 
-            color: var(--text); 
-            text-shadow: 0 0 10px rgba(255,255,255,0.1);
-        }
-        .features h2 span { color: var(--primary); }
-        
-        .cards { 
-            display: flex; 
-            justify-content: center; 
-            gap: 40px; 
-            flex-wrap: wrap; 
-        }
-        
-        .card { 
-            background: #161a1d; 
-            padding: 40px 30px; 
-            border-radius: 20px; 
-            width: 320px; 
-            transition: all 0.4s ease; 
-            border-bottom: 5px solid var(--primary);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            transition: 0.5s;
-        }
-        
-        .card:hover::before { left: 100%; }
-        .card:hover { 
-            transform: translateY(-15px); 
-            box-shadow: 0 15px 30px rgba(155, 17, 30, 0.3); 
-            border-color: var(--secondary);
-        }
-        
-        .card i { 
-            font-size: 3.5rem; 
-            color: var(--secondary); 
-            margin-bottom: 25px; 
-            text-shadow: 0 0 15px rgba(217, 4, 41, 0.4);
-        }
-        
-        .card h3 { 
-            font-size: 1.6rem; 
-            margin-bottom: 15px; 
-            font-weight: 700;
-        }
-        
-        .card p { 
-            color: #adb5bd; 
-            line-height: 1.7; 
-            font-size: 1.1rem;
+        .matchmaking h2 { font-size: 3rem; margin-bottom: 20px; text-shadow: 0 0 10px rgba(255,255,255,0.1); }
+        .matchmaking h2 span { color: var(--primary); }
+        .matchmaking p { color: #adb5bd; margin-bottom: 40px; font-size: 1.2rem; }
+
+        .form-container {
+            max-width: 500px; margin: 0 auto; background: #0b090a; padding: 40px; border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5); border: 1px solid rgba(155, 17, 30, 0.3);
         }
 
-        /* تأثير القلوب المتطايرة بالخلفية */
-        .heart-particle { 
-            position: absolute; 
-            color: var(--primary); 
-            font-size: 20px; 
-            animation: float 5s linear infinite; 
-            opacity: 0; 
-            z-index: 1;
+        .form-group { margin-bottom: 25px; text-align: right; }
+        .form-group label { display: block; margin-bottom: 10px; font-weight: bold; color: var(--secondary); }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #333; background: #1a1d20;
+            color: white; font-size: 1rem; outline: none; transition: 0.3s;
         }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(155, 17, 30, 0.5); }
+        .form-group textarea { resize: none; height: 100px; }
         
-        @keyframes float { 
-            0% { transform: translateY(100vh) scale(0); opacity: 0; } 
-            20% { opacity: 0.4; }
-            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; } 
+        .submit-btn {
+            width: 100%; padding: 15px; font-size: 1.2rem; font-weight: bold; background: var(--primary); color: white;
+            border: none; border-radius: 10px; cursor: pointer; transition: 0.3s;
         }
+        .submit-btn:hover { background: var(--secondary); }
 
-        /* حقوق النشر */
-        footer {
-            text-align: center;
-            padding: 30px;
-            background: #000;
-            color: #6c757d;
-            border-top: 1px solid rgba(155, 17, 30, 0.2);
-        }
+        .heart-particle { position: absolute; color: var(--primary); font-size: 20px; animation: float 5s linear infinite; opacity: 0; z-index: 1; }
+        @keyframes float { 0% { transform: translateY(100vh) scale(0); opacity: 0; } 20% { opacity: 0.4; } 100% { transform: translateY(-10vh) scale(1.5); opacity: 0; } }
+
+        footer { text-align: center; padding: 30px; background: #000; color: #6c757d; }
     </style>
 </head>
 <body>
@@ -207,29 +88,30 @@
 
     <section class="hero">
         <h1>𝑪𝒐𝒖𝒑𝒍𝒆𝒔 𝑿</h1>
-        <p>المكان الذي تلتقي فيه القلوب وتُبنى فيه العلاقات. انضم إلى أفخم مجتمع ديسكورد للتعارف وتكوين صداقات حقيقية في بيئة راقية وآمنة.</p>
-        
-        <a href="#" class="btn" target="_blank"><i class="fab fa-discord"></i> انضم للسيرفر الآن</a>
+        <p>المكان الذي تلتقي فيه القلوب. انضم إلى أفخم مجتمع ديسكورد للتعارف وتكوين صداقات حقيقية في بيئة راقية.</p>
+        <a href="https://discord.gg/EqHBZjSeC" class="btn" target="_blank"><i class="fab fa-discord"></i> انضم للسيرفر الآن</a>
     </section>
 
-    <section class="features">
-        <h2>ليش تختار <span>سيرفرنا؟</span></h2>
-        <div class="cards">
-            <div class="card">
-                <i class="fas fa-heartbeat"></i>
-                <h3>فعاليات رومانسية</h3>
-                <p>مسابقات وفعاليات يومية مصممة خصيصاً عشان تقرب القلوب وتكسر الجليد بين الأعضاء بكل سلاسة.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-shield-alt"></i>
-                <h3>بيئة آمنة وراقية</h3>
-                <p>نظام حماية وإدارة صارمة تضمن لك تجربة خالية من الإزعاج واحترام متبادل بين الجميع على مدار الساعة.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-headphones-alt"></i>
-                <h3>رومات صوتية هادئة</h3>
-                <p>رومات مخصصة للسوالف الهادية والتعارف العميق بتنسيق عالي الجودة وبعيداً عن الفوضى.</p>
-            </div>
+    <section class="matchmaking" id="join-form">
+        <h2>بوابة <span>التعارف</span></h2>
+        <p>قدم نبذة عنك وبتوصل رسالتك لروم التعارف الخاص بالسيرفر مباشرة!</p>
+        
+        <div class="form-container">
+            <form id="discordForm">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> اسمك أو لقبك:</label>
+                    <input type="text" id="userName" placeholder="اكتب اسمك هنا..." required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-alt"></i> العمر:</label>
+                    <input type="number" id="userAge" placeholder="كم عمرك؟" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-comment-dots"></i> نبذة عنك (وش تبحث عنه؟):</label>
+                    <textarea id="userBio" placeholder="تكلم عن نفسك شوي..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> إرسال الطلب للسيرفر</button>
+            </form>
         </div>
     </section>
 
@@ -238,23 +120,62 @@
     </footer>
 
     <script>
+        // تأثير القلوب
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart-particle');
             heart.innerHTML = '<i class="fas fa-heart"></i>';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 4 + 's'; // سرعة عشوائية
-            heart.style.fontSize = Math.random() * 15 + 10 + 'px'; // حجم عشوائي
-            
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            heart.style.fontSize = Math.random() * 15 + 10 + 'px';
             document.querySelector('.hero').appendChild(heart);
-            
-            setTimeout(() => { 
-                heart.remove(); 
-            }, 6000);
+            setTimeout(() => { heart.remove(); }, 6000);
         }
-        
-        // كمية القلوب المتطايرة (كل 400 جزء من الثانية يطلع قلب)
         setInterval(createHeart, 400);
+
+        // سكربت إرسال البيانات للديسكورد
+        document.getElementById('discordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('userName').value;
+            const age = document.getElementById('userAge').value;
+            const bio = document.getElementById('userBio').value;
+
+            // ⚠️ تحذير: ضع رابط الـ Webhook الخاص بك بين علامتي التنصيص أسفله ⚠️
+            const webhookURL = "حط_رابط_الويبهوك_هنا"; 
+
+            if(webhookURL === "حط_رابط_الويبهوك_هنا") {
+                alert("لازم صاحب الموقع يضيف رابط الـ Webhook عشان يشتغل الإرسال!");
+                return;
+            }
+
+            const payload = {
+                embeds: [{
+                    title: "💌 طلب تعارف جديد من الموقع!",
+                    color: 10162462, // لون أحمر غامق
+                    fields: [
+                        { name: "👤 الاسم/اللقب", value: name, inline: true },
+                        { name: "📅 العمر", value: age, inline: true },
+                        { name: "💬 النبذة", value: bio }
+                    ],
+                    footer: { text: "مرسل من موقع 𝑪𝒐𝒖𝒑𝒍𝒆𝒔 𝑿" },
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(response => {
+                alert('تم إرسال طلبك للسيرفر بنجاح! شكراً لك.');
+                document.getElementById('discordForm').reset();
+            })
+            .catch(error => {
+                alert('حدث خطأ أثناء الإرسال، حاول مرة ثانية.');
+            });
+        });
     </script>
 
 </body>
