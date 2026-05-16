@@ -45,7 +45,7 @@
         
         .btn:hover { transform: scale(1.08) translateY(-5px); box-shadow: 0 10px 30px rgba(217, 4, 41, 0.9); }
 
-        /* قسم استمارة التعارف (الجديد) */
+        /* قسم استمارة التعارف */
         .matchmaking {
             padding: 100px 20px; text-align: center; background: #161a1d; border-top: 5px solid var(--primary);
         }
@@ -133,7 +133,7 @@
         }
         setInterval(createHeart, 400);
 
-        // سكربت إرسال البيانات للديسكورد
+        // سكربت إرسال البيانات للديسكورد عبر الـ Webhook المربوط
         document.getElementById('discordForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -141,18 +141,12 @@
             const age = document.getElementById('userAge').value;
             const bio = document.getElementById('userBio').value;
 
-            // ⚠️ تحذير: ضع رابط الـ Webhook الخاص بك بين علامتي التنصيص أسفله ⚠️
-            const webhookURL = "حط_رابط_الويبهوك_هنا"; 
-
-            if(webhookURL === "حط_رابط_الويبهوك_هنا") {
-                alert("لازم صاحب الموقع يضيف رابط الـ Webhook عشان يشتغل الإرسال!");
-                return;
-            }
+            const webhookURL = "https://discord.com/api/webhooks/1505269322006790306/vv4S6OEX0xU8oC2dpS83qnrM1Bu83d4KWvCpv82Osw9eDXQVuTEDgB5_AYp4icRk0lfP"; 
 
             const payload = {
                 embeds: [{
                     title: "💌 طلب تعارف جديد من الموقع!",
-                    color: 10162462, // لون أحمر غامق
+                    color: 10162462, 
                     fields: [
                         { name: "👤 الاسم/اللقب", value: name, inline: true },
                         { name: "📅 العمر", value: age, inline: true },
@@ -169,8 +163,12 @@
                 body: JSON.stringify(payload)
             })
             .then(response => {
-                alert('تم إرسال طلبك للسيرفر بنجاح! شكراً لك.');
-                document.getElementById('discordForm').reset();
+                if(response.ok) {
+                    alert('تم إرسال طلبك للسيرفر بنجاح! شكراً لك.');
+                    document.getElementById('discordForm').reset();
+                } else {
+                    alert('في مشكلة بالويب هوك، تأكد من الإعدادات بالديسكورد.');
+                }
             })
             .catch(error => {
                 alert('حدث خطأ أثناء الإرسال، حاول مرة ثانية.');
