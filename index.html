@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مواجهة عبدالله الحماسية</title>
+    <title>مواجهة عبدالله الحماسية - النسخة الكاملة</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -25,341 +25,427 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow-x: hidden;
             padding: 20px;
+            background: radial-gradient(circle at center, #2b0b10 0%, var(--bg) 100%);
         }
 
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 10px;
-            text-shadow: 0 0 15px var(--secondary);
-            color: var(--text);
-        }
-
-        /* لافتة النقود */
-        .score-container {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            background: var(--panel);
-            padding: 10px 30px;
-            border-radius: 50px;
-            border: 2px solid var(--primary);
-            box-shadow: 0 0 15px rgba(155, 17, 30, 0.4);
+        /* الهيدر العلوي */
+        .header-stats {
+            width: 100%;
+            max-width: 900px;
             display: flex;
-            align-items: center;
+            justify-content: space-between;
+            background: rgba(22, 26, 29, 0.9);
+            padding: 15px 25px;
+            border-radius: 15px;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 20px rgba(155, 17, 30, 0.4);
+            margin-bottom: 20px;
+            flex-wrap: wrap;
             gap: 10px;
         }
-        .score-container span { color: var(--gold); font-weight: 900; }
 
-        /* منطقة اللعب والأنميشن */
-        .game-area {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            height: 350px;
+        .stat-box { font-size: 1.2rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .stat-box span { color: var(--gold); font-weight: 900; }
+        .rebirth-badge { color: #00b4d8 !important; text-shadow: 0 0 10px rgba(0, 180, 216, 0.6); }
+
+        /* منطقة القتال الرئيسية */
+        .main-container {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 30px;
+            width: 100%;
+            max-width: 900px;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
-        /* شخصية عبدالله الافتراضية الاحترافية */
-        .target-box {
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(145deg, #1f2428, #0b090a);
-            border: 4px solid var(--primary);
-            border-radius: 50%;
+        .game-screen {
+            flex: 1;
+            min-width: 320px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            border: 1px solid rgba(155, 17, 30, 0.2);
+            padding: 20px;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        /* شريط حياة عبدالله */
+        .boss-info { width: 100%; text-align: center; margin-bottom: 20px; }
+        .boss-name { font-size: 1.5rem; font-weight: 900; margin-bottom: 5px; color: #fff; }
+        .hp-bar-bg { width: 100%; height: 20px; background: #333; border-radius: 10px; overflow: hidden; border: 1px solid #555; }
+        .hp-bar-fill { width: 100%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); transition: width 0.1s ease; }
+
+        /* حلبة ومجسم عبدالله */
+        .arena {
+            width: 100%;
+            height: 300px;
+            display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
+        }
+
+        .character {
+            width: 160px;
+            height: 160px;
+            background: #222;
+            border: 5px solid var(--primary);
+            border-radius: 50%;
             cursor: pointer;
             position: relative;
-            box-shadow: 0 0 30px rgba(155, 17, 30, 0.6);
+            box-shadow: 0 0 40px rgba(155, 17, 30, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             transition: transform 0.05s ease;
         }
 
-        .target-box i { font-size: 5rem; color: #adb5bd; transition: 0.1s; }
-        .target-box p { font-size: 1.5rem; font-weight: 900; margin-top: 10px; color: var(--text); letter-spacing: 1px; }
-
-        /* أنميشن الاهتزاز والضرب */
-        .hit { animation: shake 0.15s ease-in-out; border-color: var(--secondary); background: #2b0b10; }
-        .hit i { color: var(--secondary); transform: scale(1.1); }
-
-        @keyframes shake {
-            0% { transform: translateX(0) scale(1); }
-            25% { transform: translateX(-10px) rotate(-5deg) scale(0.95); }
-            50% { transform: translateX(10px) rotate(5deg) scale(0.95); }
-            75% { transform: translateX(-5px) scale(1); }
-            100% { transform: translateX(0); }
+        .character i { font-size: 5.5rem; color: #fff; }
+        
+        /* أنميشن الضرب والدم */
+        .character.damaged { animation: punch 0.15s ease-in-out; border-color: #ff0000; background: #4a0005; box-shadow: 0 0 50px #ff0000; }
+        @keyframes punch {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.9) rotate(-8deg); }
+            100% { transform: scale(1); }
         }
 
         /* أرقام الضرر المتطايرة */
-        .damage-pop {
-            position: absolute;
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--secondary);
-            text-shadow: 0 0 8px #000;
-            pointer-events: none;
-            animation: flyUp 0.6s ease-out forwards;
-            z-index: 10;
+        .dmg-pop {
+            position: absolute; font-size: 2.2rem; font-weight: 900; color: #ff3333;
+            text-shadow: 0 0 10px #000; pointer-events: none; animation: flyUp 0.6s ease-out forwards; z-index: 100;
         }
-
         @keyframes flyUp {
             0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-120px) scale(1.4); }
+            100% { opacity: 0; transform: translateY(-140px) scale(1.3); }
         }
 
-        /* متجر التطويرات */
-        .shop-container {
-            width: 100%;
-            max-width: 500px;
-            background: var(--panel);
-            padding: 20px;
-            border-radius: 20px;
-            border: 1px solid rgba(155, 17, 30, 0.3);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+        /* القوائم الجانبية (المتجر والريبيرة) */
+        .side-panels { flex: 1; min-width: 320px; display: flex; flex-direction: column; gap: 20px; }
+        .panel { background: var(--panel); border-radius: 20px; padding: 20px; border: 1px solid rgba(155, 17, 30, 0.3); }
+        .panel-title { font-size: 1.3rem; font-weight: 900; margin-bottom: 15px; border-bottom: 2px solid var(--primary); padding-bottom: 5px; display: flex; align-items: center; gap: 10px; }
 
-        .shop-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
+        /* عناصر التطويرات */
         .upgrade-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(0,0,0,0.3);
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            border: 1px solid #2a080c;
-            transition: 0.3s;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0,0,0,0.4); padding: 12px; border-radius: 12px; margin-bottom: 10px; border: 1px solid #222;
         }
-
-        .upgrade-item:hover { border-color: var(--primary); background: rgba(155, 17, 30, 0.05); }
-
-        .upgrade-info h3 { font-size: 1.1rem; margin-bottom: 3px; }
-        .upgrade-info p { font-size: 0.85rem; color: #adb5bd; }
-
-        .buy-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+        .upgrade-info h4 { font-size: 1rem; margin-bottom: 2px; color: #fff; }
+        .upgrade-info p { font-size: 0.8rem; color: #aaa; }
+        
+        .btn-buy {
+            background: var(--primary); color: #fff; border: none; padding: 8px 15px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 4px;
         }
+        .btn-buy:hover:not(:disabled) { background: var(--secondary); transform: scale(1.05); }
+        .btn-buy:disabled { background: #333; color: #777; cursor: not-allowed; }
 
-        .buy-btn:hover:not(:disabled) { background: var(--secondary); transform: scale(1.05); }
-        .buy-btn:disabled { background: #333; color: #777; cursor: not-allowed; }
-
-        /* إحصائيات سريعة تحت */
-        .stats {
-            margin-top: 15px;
-            display: flex;
-            justify-content: space-around;
-            font-size: 0.9rem;
-            color: #aaa;
-            width: 100%;
+        /* زر الريبيرث الكبير */
+        .btn-rebirth {
+            width: 100%; background: linear-gradient(45deg, #0077b6, #00b4d8); color: white; border: none; padding: 15px; border-radius: 12px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; box-shadow: 0 0 15px rgba(0, 180, 216, 0.4);
         }
+        .btn-rebirth:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 5px 20px rgba(0, 180, 216, 0.7); }
+        .btn-rebirth:disabled { background: #333; color: #666; box-shadow: none; cursor: not-allowed; }
     </style>
 </head>
 <body>
 
-    <h1>مواجهة عبدالله</h1>
-    
-    <div class="score-container">
-        <i class="fas fa-coins"></i>
-        <span id="coinsDisplay">0</span> نقود
+    <div class="header-stats">
+        <div class="stat-box"><i class="fas fa-coins" style="color:var(--gold)"></i> رصيدك: <span id="coins">0</span></div>
+        <div class="stat-box"><i class="fas fa-skull-crossbones" style="color:var(--secondary)"></i> ليفل عبدالله: <span id="bossLvl">1</span></div>
+        <div class="stat-box"><i class="fas fa-crown" style="color:#00b4d8"></i> ريبيرث: <span id="rebirths" class="rebirth-badge">0</span></div>
     </div>
 
-    <div class="game-area">
-        <div class="target-box" id="target">
-            <i class="fas fa-user-ninja"></i>
-            <p>عبدالله</p>
-        </div>
-    </div>
-
-    <div class="shop-container">
-        <div class="shop-title"><i class="fas fa-shopping-cart" style="color: var(--primary);"></i> متجر التطويرات الفخمة</div>
-        
-        <div class="upgrade-item">
-            <div class="upgrade-info">
-                <h3>قبضة حديدية (قوة الضربة)</h3>
-                <p>تزيد قوتك بمقدار +1 لكل ضغطة</p>
-                <p>المستوى الحالي: <span id="clickLvl">1</span></p>
+    <div class="main-container">
+        <div class="game-screen">
+            <div class="boss-info">
+                <div class="boss-name">عبدالله (الضحية)</div>
+                <div class="hp-bar-bg">
+                    <div class="hp-bar-fill" id="hpBar"></div>
+                </div>
+                <div style="font-size: 0.9rem; margin-top: 5px; color: #aaa;" id="hpText">100 / 100 HP</div>
             </div>
-            <button class="buy-btn" id="buyClick">
-                <span id="clickCost">10</span> <i class="fas fa-coins"></i>
-            </button>
-        </div>
 
-        <div class="upgrade-item">
-            <div class="upgrade-info">
-                <h3>سلاح تلقائي (Auto-Clicker)</h3>
-                <p>يضرب عبدالله تلقائياً +1 كل ثانية</p>
-                <p>المستوى الحالي: <span id="autoLvl">0</span></p>
+            <div class="arena">
+                <div class="character" id="abdullah">
+                    <i class="fas fa-user-injured"></i>
+                </div>
             </div>
-            <button class="buy-btn" id="buyAuto">
-                <span id="autoCost">50</span> <i class="fas fa-coins"></i>
-            </button>
         </div>
-    </div>
 
-    <div class="stats">
-        <div>قوة الضغطة الحالية: <span id="statsClick">1</span></div>
-        <div>الضرب التلقائي/ثانية: <span id="statsAuto">0</span></div>
+        <div class="side-panels">
+            <div class="panel">
+                <div class="panel-title"><i class="fas fa-fire" style="color:var(--primary)"></i> متجر التطويرات القوية</div>
+                
+                <div class="upgrade-item">
+                    <div class="upgrade-info">
+                        <h4>قبضة الملك (الضرر)</h4>
+                        <p>زيادة ضرر الضغطة +1</p>
+                        <p>مستوى: <span id="dmgLvl">1</span></p>
+                    </div>
+                    <button class="btn-buy" id="buyDmg"><span id="dmgCost">10</span> <i class="fas fa-coins"></i></button>
+                </div>
+
+                <div class="upgrade-item">
+                    <div class="upgrade-info">
+                        <h4>برق الديسكورد (تلقائي)</h4>
+                        <p>ضرب تلقائي +1 بالثانية</p>
+                        <p>مستوى: <span id="autoLvl">0</span></p>
+                    </div>
+                    <button class="btn-buy" id="buyAuto"><span id="autoCost">50</span> <i class="fas fa-coins"></i></button>
+                </div>
+
+                <div class="upgrade-item">
+                    <div class="upgrade-info">
+                        <h4>جناح الحب الأبدي (مضاعف الفلوس)</h4>
+                        <p>يعطي دبل كوينز للضربة</p>
+                        <p>مستوى: <span id="multLvl">1</span></p>
+                    </div>
+                    <button class="btn-buy" id="buyMult"><span id="multCost">200</span> <i class="fas fa-coins"></i></button>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title"><i class="fas fa-gem" style="color:#00b4d8"></i> نظام الريبيرث الفاخر</div>
+                <p style="font-size: 0.85rem; color: #bbb; line-height: 1.4; margin-bottom: 10px;">
+                    عند القيام بالريبيرة، سيتم تصفير الفلوس والتطويرات مقابل الحصول على **تاج الريبيرث**، وكل مستوى يعطيك **+100% بونص دائم للضرر والفلوس**!
+                </p>
+                <div style="font-weight: bold; margin-bottom: 10px; font-size: 0.95rem;">السعر المطلوب: <span id="rebirthCost" style="color:var(--gold)">10000</span> كوينز</div>
+                <button class="btn-rebirth" id="btnRebirth" disabled>إعادة الميلاد (Rebirth)</button>
+            </div>
+        </div>
     </div>
 
     <script>
-        // إعداد المتغيرات الأساسية للعبة
+        // إحصائيات اللعبة الأساسية
         let coins = 0;
-        let clickPower = 1;
-        let autoPower = 0;
+        let rebirths = 0;
         
-        let clickUpgradeCost = 10;
-        let autoUpgradeCost = 50;
+        let bossLevel = 1;
+        let maxHp = 100;
+        let currentHp = 100;
 
-        let clickLevel = 1;
+        let dmgPower = 1;
+        let autoPower = 0;
+        let moneyMultiplier = 1;
+
+        let dmgCost = 10;
+        let autoCost = 50;
+        let multCost = 200;
+        let rebirthCost = 10000;
+
+        let dmgLevel = 1;
         let autoLevel = 0;
+        let multLevel = 1;
 
-        // استدعاء عناصر الواجهة
-        const target = document.getElementById('target');
-        const coinsDisplay = document.getElementById('coinsDisplay');
-        const clickLvlDoc = document.getElementById('clickLvl');
-        const clickCostDoc = document.getElementById('clickCost');
+        // عناصر الواجهة
+        const abdullah = document.getElementById('abdullah');
+        const hpBar = document.getElementById('hpBar');
+        const hpText = document.getElementById('hpText');
+        const coinsDoc = document.getElementById('coins');
+        const bossLvlDoc = document.getElementById('bossLvl');
+        const rebirthsDoc = document.getElementById('rebirths');
+        
+        const dmgLvlDoc = document.getElementById('dmgLvl');
+        const dmgCostDoc = document.getElementById('dmgCost');
         const autoLvlDoc = document.getElementById('autoLvl');
         const autoCostDoc = document.getElementById('autoCost');
-        const statsClick = document.getElementById('statsClick');
-        const statsAuto = document.getElementById('statsAuto');
-        const buyClickBtn = document.getElementById('buyClick');
+        const multLvlDoc = document.getElementById('multLvl');
+        const multCostDoc = document.getElementById('multCost');
+        const rebirthCostDoc = document.getElementById('rebirthCost');
+        
+        const buyDmgBtn = document.getElementById('buyDmg');
         const buyAutoBtn = document.getElementById('buyAuto');
+        const buyMultBtn = document.getElementById('buyMult');
+        const btnRebirth = document.getElementById('btnRebirth');
 
-        // تحميل البيانات المحفوظة بالجهاز فور تشغيل اللعبة
-        function loadData() {
-            if(localStorage.getItem('saved_coins')) {
-                coins = parseInt(localStorage.getItem('saved_coins'));
-                clickPower = parseInt(localStorage.getItem('saved_clickPower'));
-                autoPower = parseInt(localStorage.getItem('saved_autoPower'));
-                clickUpgradeCost = parseInt(localStorage.getItem('saved_clickCost'));
-                autoUpgradeCost = parseInt(localStorage.getItem('saved_autoCost'));
-                clickLevel = parseInt(localStorage.getItem('saved_clickLevel'));
-                autoLevel = parseInt(localStorage.getItem('saved_autoLevel'));
+        // تحميل البيانات المحفوظة بالجهاز
+        function loadGame() {
+            if(localStorage.getItem('ab_coins')) {
+                coins = parseInt(localStorage.getItem('ab_coins'));
+                rebirths = parseInt(localStorage.getItem('ab_rebirths'));
+                bossLevel = parseInt(localStorage.getItem('ab_bossLvl'));
+                maxHp = parseInt(localStorage.getItem('ab_maxHp'));
+                currentHp = maxHp;
+                dmgPower = parseInt(localStorage.getItem('ab_dmgPower'));
+                autoPower = parseInt(localStorage.getItem('ab_autoPower'));
+                moneyMultiplier = parseInt(localStorage.getItem('ab_mult'));
+                dmgCost = parseInt(localStorage.getItem('ab_dmgCost'));
+                autoCost = parseInt(localStorage.getItem('ab_autoCost'));
+                multCost = parseInt(localStorage.getItem('ab_multCost'));
+                rebirthCost = parseInt(localStorage.getItem('ab_rebirthCost'));
+                dmgLevel = parseInt(localStorage.getItem('ab_dmgLvl'));
+                autoLevel = parseInt(localStorage.getItem('ab_autoLvl'));
+                multLevel = parseInt(localStorage.getItem('ab_multLvl'));
             }
             updateUI();
         }
 
-        // حفظ البيانات في الجهاز
-        function saveData() {
-            localStorage.setItem('saved_coins', coins);
-            localStorage.setItem('saved_clickPower', clickPower);
-            localStorage.setItem('saved_autoPower', autoPower);
-            localStorage.setItem('saved_clickCost', clickUpgradeCost);
-            localStorage.setItem('saved_autoCost', autoUpgradeCost);
-            localStorage.setItem('saved_clickLevel', clickLevel);
-            localStorage.setItem('saved_autoLevel', autoLevel);
+        // حفظ البيانات بالجهاز
+        function saveGame() {
+            localStorage.setItem('ab_coins', coins);
+            localStorage.setItem('ab_rebirths', rebirths);
+            localStorage.setItem('ab_bossLvl', bossLevel);
+            localStorage.setItem('ab_maxHp', maxHp);
+            localStorage.setItem('ab_dmgPower', dmgPower);
+            localStorage.setItem('ab_autoPower', autoPower);
+            localStorage.setItem('ab_mult', moneyMultiplier);
+            localStorage.setItem('ab_dmgCost', dmgCost);
+            localStorage.setItem('ab_autoCost', autoCost);
+            localStorage.setItem('ab_multCost', multCost);
+            localStorage.setItem('ab_rebirthCost', rebirthCost);
+            localStorage.setItem('ab_dmgLvl', dmgLevel);
+            localStorage.setItem('ab_autoLvl', autoLevel);
+            localStorage.setItem('ab_multLvl', multLevel);
         }
 
-        // تحديث أزرار ونصوص الواجهة بشكل مستمر
         function updateUI() {
-            coinsDisplay.innerText = coins;
-            clickLvlDoc.innerText = clickLevel;
-            clickCostDoc.innerText = clickUpgradeCost;
+            coinsDoc.innerText = Math.floor(coins);
+            bossLvlDoc.innerText = bossLevel;
+            rebirthsDoc.innerText = rebirths;
+            
+            dmgLvlDoc.innerText = dmgLevel;
+            dmgCostDoc.innerText = dmgCost;
             autoLvlDoc.innerText = autoLevel;
-            autoCostDoc.innerText = autoUpgradeCost;
-            statsClick.innerText = clickPower;
-            statsAuto.innerText = autoPower;
+            autoCostDoc.innerText = autoCost;
+            multLvlDoc.innerText = multLevel;
+            multCostDoc.innerText = multCost;
+            rebirthCostDoc.innerText = rebirthCost;
 
-            // تفعيل أو تعطيل الأزرار حسب رصيد الفلوس
-            buyClickBtn.disabled = coins < clickUpgradeCost;
-            buyAutoBtn.disabled = coins < autoUpgradeCost;
+            // تحديث شريط الدم
+            let pct = (currentHp / maxHp) * 100;
+            if(pct < 0) pct = 0;
+            hpBar.style.width = pct + "%";
+            hpText.innerText = `${Math.floor(currentHp)} / ${maxHp} HP`;
+
+            // تشغيل وتعطيل الأزرار
+            buyDmgBtn.disabled = coins < dmgCost;
+            buyAutoBtn.disabled = coins < autoCost;
+            buyMultBtn.disabled = coins < multCost;
+            btnRebirth.disabled = coins < rebirthCost;
         }
 
-        // أنميشن ظهور رقم الضرر المتطاير
-        function createDamagePop(amount) {
+        // أنميشن تطاير الأرقام
+        function spawnPop(amount, isCrit = false) {
             const pop = document.createElement('div');
-            pop.classList.add('damage-pop');
-            pop.innerText = `+${amount}`;
+            pop.classList.add('dmg-pop');
+            pop.innerText = `-${amount} HP`;
+            if(isCrit) pop.style.color = "#ffb703";
             
-            // توزيع عشوائي طفيف لمكان خروج الأرقام عشان ما تطلع فوق بعض
-            const randomX = Math.random() * 60 - 30; 
-            const randomY = Math.random() * 40 - 20;
-            pop.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            let rx = Math.random() * 80 - 40;
+            pop.style.left = `calc(50% + ${rx}px)`;
+            pop.style.top = `40%`;
             
-            document.querySelector('.game-area').appendChild(pop);
-            
-            // حذف العنصر بعد اكتمال الأنميشن عشان لا يثقل الجهاز
-            setTimeout(() => { pop.remove(); }, 600);
+            document.querySelector('.game-screen').appendChild(pop);
+            setTimeout(() => pop.remove(), 600);
         }
 
-        // نظام الضغط (الضرب)
-        target.addEventListener('click', () => {
-            coins += clickPower;
-            
-            // تشغيل أنميشن الاهتزاز
-            target.classList.add('hit');
-            setTimeout(() => { target.classList.remove('hit'); }, 150);
-            
-            createDamagePop(clickPower);
+        // سيستم الضرب المباشر
+        abdullah.addEventListener('click', () => {
+            let actualDmg = dmgPower * (1 + rebirths); // بونص الريبيرث يزيد القوة
+            currentHp -= actualDmg;
+
+            // إضافة كوينز
+            let earned = dmgPower * moneyMultiplier * (1 + rebirths);
+            coins += earned;
+
+            abdullah.classList.add('damaged');
+            setTimeout(() => abdullah.classList.remove('damaged'), 120);
+
+            spawnPop(actualDmg);
+            checkDeath();
             updateUI();
-            saveData();
+            saveGame();
         });
 
-        // شراء تطوير قوة الضربة
-        buyClickBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // يمنع احتساب الضغطة كضربة لعبدالله
-            if (coins >= clickUpgradeCost) {
-                coins -= clickUpgradeCost;
-                clickLevel++;
-                clickPower += 1;
-                clickUpgradeCost = Math.floor(clickUpgradeCost * 1.5); // زيادة السعر للمرة الجاية
-                updateUI();
-                saveData();
+        // تشابه فحص الموت للرئيس
+        function checkDeath() {
+            if(currentHp <= 0) {
+                // مكافأة القضاء على عبدالله
+                let reward = bossLevel * 100 * (1 + rebirths);
+                coins += reward;
+                alert(`كفو! قضيت على عبدالله ليفل ${bossLevel} وحصلت على ${reward} كوينز مكافأة!`);
+                
+                bossLevel++;
+                maxHp = Math.floor(maxHp * 1.4);
+                currentHp = maxHp;
+            }
+        }
+
+        // شراء أزرار الأبجريد
+        buyDmgBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if(coins >= dmgCost) {
+                coins -= dmgCost;
+                dmgLevel++;
+                dmgPower += 2;
+                dmgCost = Math.floor(dmgCost * 1.5);
+                updateUI(); saveGame();
             }
         });
 
-        // شراء تطوير الضرب التلقائي
         buyAutoBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            if (coins >= autoUpgradeCost) {
-                coins -= autoUpgradeCost;
+            if(coins >= autoCost) {
+                coins -= autoCost;
                 autoLevel++;
                 autoPower += 1;
-                autoUpgradeCost = Math.floor(autoUpgradeCost * 1.6);
-                updateUI();
-                saveData();
+                autoCost = Math.floor(autoCost * 1.6);
+                updateUI(); saveGame();
             }
         });
 
-        // العمل المستمر للـ Auto-Clicker في الخلفية (كل ثانية)
+        buyMultBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if(coins >= multCost) {
+                coins -= multCost;
+                multLevel++;
+                moneyMultiplier += 1;
+                multCost = Math.floor(multCost * 1.7);
+                updateUI(); saveGame();
+            }
+        });
+
+        // سيستم الريبيرث
+        btnRebirth.addEventListener('click', () => {
+            if(coins >= rebirthCost) {
+                rebirths++;
+                // تصغير كل شيء ما عدا مستوى الريبيرث
+                coins = 0;
+                bossLevel = 1;
+                maxHp = 100;
+                currentHp = maxHp;
+                dmgPower = 1;
+                autoPower = 0;
+                moneyMultiplier = 1;
+                dmgCost = 10;
+                autoCost = 50;
+                multCost = 200;
+                dmgLevel = 1;
+                autoLevel = 0;
+                multLevel = 1;
+                rebirthCost = Math.floor(rebirthCost * 2.5); // زيادة سعر الريبيرث القادم
+                
+                alert(`مبروك! سويت ريبييرث رقم ${rebirths}! قوتك وفلوسك الحين دبل.`);
+                updateUI(); saveGame();
+            }
+        });
+
+        // تشغيل التلقائي بالأوتو كليكر خلفية الكود
         setInterval(() => {
-            if (autoPower > 0) {
-                coins += autoPower;
-                createDamagePop(autoPower);
+            if(autoPower > 0) {
+                let d = autoPower * (1 + rebirths);
+                currentHp -= d;
+                coins += autoPower * moneyMultiplier * (1 + rebirths);
+                checkDeath();
                 updateUI();
-                saveData();
+                saveGame();
             }
         }, 1000);
 
-        // تشغيل اللعبة وتحميل البيانات أول ما تفتح الصفحة
-        loadData();
+        // تشغيل اللعبة
+        loadGame();
     </script>
 </body>
 </html>
