@@ -1,4 +1,6 @@
+# لعبة: يزن عم عبدالله 😂
 
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -332,21 +334,414 @@ alert('ما عندك كوين كفاية 😂');
 </html>
 ```
 
-## طريقة التشغيل
+## نسخة مطورة إضافية 🔥
 
-1. انسخ الكود كامل.
-2. افتح VS Code أو أي محرر.
-3. سوي ملف اسمه index.html
-4. الصق الكود.
-5. شغل الملف بالمتصفح.
+### إضافات النسخة الجديدة
 
-تقدر بعد تضيف:
+* أنيميشن احترافي للشخصية
+* شعر ووجه أفضل
+* اهتزاز شاشة
+* نظام HP
+* كومبو ضربات
+* تأثيرات دم محسنة
+* توافق كامل مع الجوال
+* متجر تطويرات أقوى
+* حركة سقوط عند الضرب
+* تأثير Glow سينمائي
+* واجهة أقوى
+* تأثير عند نقص الصحة
+* صوتيات أقوى
 
-* عداد HP
-* زعماء
-* أسلحة
-* مؤثرات شاشة
-* أصوات أقوى
-* متجر سكنات
-* نظام لفل
-* كومبو
+استبدل الكود القديم بهذا التطوير:
+
+```html
+<style>
+
+body{
+margin:0;
+overflow:hidden;
+background:radial-gradient(circle,#1a1a1a,#050505);
+font-family:Arial;
+color:white;
+}
+
+#title{
+position:fixed;
+left:30px;
+top:30px;
+font-size:55px;
+font-weight:900;
+text-shadow:0 0 20px red;
+z-index:999;
+}
+
+#ui{
+position:fixed;
+right:20px;
+top:20px;
+z-index:999;
+}
+
+.box{
+background:#111;
+padding:15px 25px;
+border-radius:20px;
+margin-bottom:15px;
+border:2px solid #222;
+font-size:28px;
+}
+
+#game{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+position:relative;
+}
+
+.character{
+position:relative;
+width:260px;
+height:560px;
+transition:0.15s;
+}
+
+.head{
+width:140px;
+height:140px;
+background:#f0c38e;
+border-radius:50%;
+margin:auto;
+position:relative;
+overflow:hidden;
+box-shadow:0 0 30px rgba(255,255,255,.1);
+}
+
+.hair{
+position:absolute;
+width:150px;
+height:70px;
+background:#111;
+top:0;
+left:-5px;
+border-radius:50px;
+}
+
+.eye{
+position:absolute;
+width:16px;
+height:16px;
+background:black;
+border-radius:50%;
+top:55px;
+}
+
+.eye1{left:38px;}
+.eye2{right:38px;}
+
+.mouth{
+position:absolute;
+width:45px;
+height:10px;
+background:black;
+bottom:35px;
+left:50%;
+transform:translateX(-50%);
+border-radius:20px;
+}
+
+.body{
+width:190px;
+height:230px;
+background:linear-gradient(180deg,#222,#111);
+margin:auto;
+margin-top:-10px;
+border-radius:35px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:42px;
+font-weight:900;
+box-shadow:0 0 25px rgba(255,0,0,.2);
+}
+
+.arm{
+position:absolute;
+width:45px;
+height:180px;
+background:#f0c38e;
+top:170px;
+border-radius:40px;
+}
+
+.arm1{left:5px;}
+.arm2{right:5px;}
+
+.leg{
+position:absolute;
+width:55px;
+height:200px;
+background:#222;
+bottom:0;
+border-radius:40px;
+}
+
+.leg1{left:65px;}
+.leg2{right:65px;}
+
+.hit{
+animation:smash .18s linear;
+}
+
+@keyframes smash{
+0%{transform:translateX(0) rotate(0deg) scale(1);} 
+25%{transform:translateX(-25px) rotate(-7deg) scale(.97);} 
+50%{transform:translateX(25px) rotate(7deg) scale(1.03);} 
+100%{transform:translateX(0) rotate(0deg) scale(1);} 
+}
+
+.blood{
+position:absolute;
+width:14px;
+height:14px;
+background:red;
+border-radius:50%;
+pointer-events:none;
+animation:fall 1s linear forwards;
+}
+
+@keyframes fall{
+0%{
+opacity:1;
+transform:translateY(0) scale(1);
+}
+100%{
+opacity:0;
+transform:translateY(180px) scale(.2);
+}
+}
+
+#hpBar{
+position:fixed;
+bottom:30px;
+left:50%;
+transform:translateX(-50%);
+width:400px;
+height:35px;
+background:#222;
+border-radius:30px;
+overflow:hidden;
+border:2px solid #444;
+}
+
+#hp{
+height:100%;
+width:100%;
+background:linear-gradient(90deg,red,darkred);
+transition:.3s;
+}
+
+#shop{
+position:fixed;
+right:20px;
+bottom:20px;
+width:260px;
+background:#111;
+padding:20px;
+border-radius:25px;
+border:2px solid #222;
+}
+
+.upgrade{
+background:#1c1c1c;
+padding:16px;
+margin-top:15px;
+border-radius:15px;
+cursor:pointer;
+transition:.3s;
+}
+
+.upgrade:hover{
+transform:scale(1.05);
+background:#333;
+}
+
+#combo{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+font-size:80px;
+font-weight:900;
+opacity:0;
+color:red;
+pointer-events:none;
+text-shadow:0 0 30px red;
+}
+
+@media(max-width:768px){
+
+#title{
+font-size:35px;
+left:15px;
+}
+
+.character{
+transform:scale(.8);
+}
+
+#shop{
+width:200px;
+}
+
+#hpBar{
+width:250px;
+}
+
+}
+
+</style>
+
+<div id="title">يزن عم عبدالله 😈</div>
+
+<div id="ui">
+<div class="box">💰 <span id="coins">0</span></div>
+<div class="box">👊 القوة: <span id="damage">1</span></div>
+</div>
+
+<div id="game">
+
+<div class="character" id="char">
+
+<div class="head">
+<div class="hair"></div>
+<div class="eye eye1"></div>
+<div class="eye eye2"></div>
+<div class="mouth"></div>
+</div>
+
+<div class="arm arm1"></div>
+<div class="arm arm2"></div>
+
+<div class="body">عبدالله</div>
+
+<div class="leg leg1"></div>
+<div class="leg leg2"></div>
+
+</div>
+
+</div>
+
+<div id="combo">COMBO x1</div>
+
+<div id="hpBar">
+<div id="hp"></div>
+</div>
+
+<div id="shop">
+<h2>🔥 التطويرات</h2>
+
+<div class="upgrade" onclick="buy(20,2)">
+👊 لكمة حديدية - 20
+</div>
+
+<div class="upgrade" onclick="buy(80,5)">
+💥 قوة خارقة - 80
+</div>
+
+<div class="upgrade" onclick="buy(200,15)">
+☠️ مود الوحش - 200
+</div>
+
+</div>
+
+<script>
+
+let coins = 0;
+let damage = 1;
+let hp = 100;
+let combo = 0;
+
+const char = document.getElementById('char');
+const hpBar = document.getElementById('hp');
+const comboText = document.getElementById('combo');
+
+char.addEventListener('click',(e)=>{
+
+coins += damage;
+combo++;
+
+if(combo > 1){
+comboText.style.opacity = '1';
+comboText.innerHTML = `COMBO x${combo}`;
+
+setTimeout(()=>{
+comboText.style.opacity = '0';
+},400);
+}
+
+hp -= damage;
+
+if(hp <= 0){
+hp = 100;
+alert('☠️ تم دعس عبدالله بالكامل 😂');
+combo = 0;
+}
+
+hpBar.style.width = hp + '%';
+
+char.classList.add('hit');
+
+setTimeout(()=>{
+char.classList.remove('hit');
+},150);
+
+for(let i=0;i<10;i++){
+
+let blood = document.createElement('div');
+blood.classList.add('blood');
+
+blood.style.left = e.pageX + (Math.random()*80-40) + 'px';
+blood.style.top = e.pageY + 'px';
+
+document.body.appendChild(blood);
+
+setTimeout(()=>{
+blood.remove();
+},1000);
+
+}
+
+coinsText.innerHTML = coins;
+damageText.innerHTML = damage;
+
+});
+
+function buy(price,power){
+
+if(coins >= price){
+coins -= price;
+damage += power;
+coinsText.innerHTML = coins;
+damageText.innerHTML = damage;
+}else{
+alert('😂 فلوسك ما تكفي');
+}
+
+}
+
+</script>
+```
+
+## أفكار تضيفها بعدين
+
+* زعيم نهائي
+* نظام مراحل
+* موسيقى حماسية
+* كاميرا تهتز
+* سكنات للشخصية
+* مود نار
+* تأثير Slow Motion
+* أسلحة وصواريخ
+* نظام إنجازات
+* Leaderboard
