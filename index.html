@@ -1,4 +1,6 @@
+# لعبة: يزن عم عبدالله 😂
 
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -332,172 +334,232 @@ alert('ما عندك كوين كفاية 😂');
 </html>
 ```
 
-## نسخة مطورة إضافية 🔥
-
-### إضافات النسخة الجديدة
-
-* أنيميشن احترافي للشخصية
-* شعر ووجه أفضل
-* اهتزاز شاشة
-* نظام HP
-* كومبو ضربات
-* تأثيرات دم محسنة
-* توافق كامل مع الجوال
-* متجر تطويرات أقوى
-* حركة سقوط عند الضرب
-* تأثير Glow سينمائي
-* واجهة أقوى
-* تأثير عند نقص الصحة
-* صوتيات أقوى
-
-استبدل الكود القديم بهذا التطوير:
+# النسخة الواقعية المطورة 🔥
 
 ```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>يزن عم عبدالله</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+
 <style>
 
-body{
+*{
 margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Cairo',sans-serif;
+}
+
+body{
+background:linear-gradient(180deg,#080808,#121212);
 overflow:hidden;
-background:radial-gradient(circle,#1a1a1a,#050505);
-font-family:Arial;
 color:white;
+height:100vh;
 }
 
-#title{
+/* خلفية */
+.background{
 position:fixed;
-left:30px;
-top:30px;
-font-size:55px;
-font-weight:900;
-text-shadow:0 0 20px red;
-z-index:999;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at top,#222 0%,#0a0a0a 70%);
+z-index:-5;
 }
 
+/* اسم اللعبة */
+#gameName{
+position:fixed;
+top:20px;
+left:25px;
+font-size:42px;
+font-weight:900;
+text-shadow:0 0 25px rgba(255,255,255,.25);
+z-index:100;
+}
+
+/* الواجهة */
 #ui{
 position:fixed;
 right:20px;
 top:20px;
-z-index:999;
+display:flex;
+flex-direction:column;
+gap:15px;
+z-index:100;
 }
 
 .box{
-background:#111;
-padding:15px 25px;
-border-radius:20px;
-margin-bottom:15px;
-border:2px solid #222;
-font-size:28px;
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(15px);
+padding:16px 25px;
+border-radius:18px;
+border:1px solid rgba(255,255,255,.08);
+font-size:22px;
+font-weight:700;
+min-width:220px;
 }
 
-#game{
+/* الشخصية */
+#arena{
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-position:relative;
+perspective:1000px;
 }
 
 .character{
 position:relative;
-width:260px;
-height:560px;
-transition:0.15s;
+width:280px;
+height:620px;
+transition:.12s;
+transform-style:preserve-3d;
 }
 
+/* الرأس */
 .head{
-width:140px;
-height:140px;
-background:#f0c38e;
+position:relative;
+width:150px;
+height:150px;
+background:#e0b07b;
 border-radius:50%;
 margin:auto;
-position:relative;
+box-shadow:
+0 0 30px rgba(0,0,0,.4),
+inset 0 -10px 25px rgba(0,0,0,.15);
 overflow:hidden;
-box-shadow:0 0 30px rgba(255,255,255,.1);
 }
 
 .hair{
 position:absolute;
-width:150px;
-height:70px;
+width:170px;
+height:85px;
 background:#111;
-top:0;
-left:-5px;
-border-radius:50px;
+left:-10px;
+top:-5px;
+border-radius:60px;
 }
 
 .eye{
 position:absolute;
-width:16px;
-height:16px;
+width:18px;
+height:18px;
 background:black;
 border-radius:50%;
-top:55px;
+top:60px;
 }
 
-.eye1{left:38px;}
-.eye2{right:38px;}
+.eye1{left:40px;}
+.eye2{right:40px;}
 
-.mouth{
+.brow{
 position:absolute;
-width:45px;
-height:10px;
-background:black;
-bottom:35px;
-left:50%;
-transform:translateX(-50%);
+width:30px;
+height:6px;
+background:#111;
+top:45px;
 border-radius:20px;
 }
 
+.brow1{left:32px;transform:rotate(10deg);} 
+.brow2{right:32px;transform:rotate(-10deg);} 
+
+.mouth{
+position:absolute;
+width:50px;
+height:10px;
+background:#111;
+left:50%;
+bottom:35px;
+transform:translateX(-50%);
+border-radius:30px;
+}
+
+/* الجسم */
 .body{
-width:190px;
-height:230px;
-background:linear-gradient(180deg,#222,#111);
+position:relative;
+width:210px;
+height:250px;
 margin:auto;
 margin-top:-10px;
-border-radius:35px;
+background:linear-gradient(180deg,#1c1c1c,#0f0f0f);
+border-radius:40px;
+box-shadow:
+0 0 40px rgba(255,0,0,.15),
+inset 0 0 20px rgba(255,255,255,.05);
 display:flex;
-justify-content:center;
 align-items:center;
-font-size:42px;
+justify-content:center;
+font-size:45px;
 font-weight:900;
-box-shadow:0 0 25px rgba(255,0,0,.2);
+letter-spacing:2px;
 }
 
+/* اليدين */
 .arm{
 position:absolute;
-width:45px;
-height:180px;
-background:#f0c38e;
-top:170px;
+width:48px;
+height:200px;
+background:#e0b07b;
+top:185px;
 border-radius:40px;
+transform-origin:top center;
 }
 
-.arm1{left:5px;}
-.arm2{right:5px;}
+.arm1{
+left:0;
+}
 
+.arm2{
+right:0;
+}
+
+/* الرجلين */
 .leg{
 position:absolute;
-width:55px;
-height:200px;
+width:60px;
+height:220px;
 background:#222;
 bottom:0;
-border-radius:40px;
+border-radius:50px;
 }
 
-.leg1{left:65px;}
-.leg2{right:65px;}
+.leg1{left:70px;}
+.leg2{right:70px;}
 
+/* أنيميشن الضرب */
 .hit{
-animation:smash .18s linear;
+animation:hitAnim .18s linear;
 }
 
-@keyframes smash{
+@keyframes hitAnim{
 0%{transform:translateX(0) rotate(0deg) scale(1);} 
-25%{transform:translateX(-25px) rotate(-7deg) scale(.97);} 
-50%{transform:translateX(25px) rotate(7deg) scale(1.03);} 
+20%{transform:translateX(-30px) rotate(-8deg) scale(.97);} 
+40%{transform:translateX(25px) rotate(7deg) scale(1.02);} 
+60%{transform:translateX(-15px) rotate(-3deg);} 
 100%{transform:translateX(0) rotate(0deg) scale(1);} 
 }
 
+/* اهتزاز شاشة */
+.shake{
+animation:shake .15s;
+}
+
+@keyframes shake{
+0%{transform:translate(0);} 
+25%{transform:translate(-8px,4px);} 
+50%{transform:translate(8px,-4px);} 
+75%{transform:translate(-5px,2px);} 
+100%{transform:translate(0);} 
+}
+
+/* الدم */
 .blood{
 position:absolute;
 width:14px;
@@ -505,10 +567,11 @@ height:14px;
 background:red;
 border-radius:50%;
 pointer-events:none;
-animation:fall 1s linear forwards;
+animation:bloodFall 1s linear forwards;
+box-shadow:0 0 15px red;
 }
 
-@keyframes fall{
+@keyframes bloodFall{
 0%{
 opacity:1;
 transform:translateY(0) scale(1);
@@ -519,100 +582,120 @@ transform:translateY(180px) scale(.2);
 }
 }
 
+/* HP */
 #hpBar{
 position:fixed;
-bottom:30px;
+bottom:25px;
 left:50%;
 transform:translateX(-50%);
-width:400px;
+width:420px;
 height:35px;
-background:#222;
+background:#1a1a1a;
 border-radius:30px;
 overflow:hidden;
-border:2px solid #444;
+border:2px solid #333;
 }
 
 #hp{
 height:100%;
 width:100%;
-background:linear-gradient(90deg,red,darkred);
+background:linear-gradient(90deg,#ff1f1f,#8b0000);
 transition:.3s;
 }
 
+/* المتجر */
 #shop{
 position:fixed;
-right:20px;
+left:20px;
 bottom:20px;
-width:260px;
-background:#111;
-padding:20px;
+width:280px;
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(15px);
+padding:22px;
 border-radius:25px;
-border:2px solid #222;
+border:1px solid rgba(255,255,255,.08);
+}
+
+#shop h2{
+margin-bottom:18px;
 }
 
 .upgrade{
-background:#1c1c1c;
+background:#1a1a1a;
 padding:16px;
 margin-top:15px;
 border-radius:15px;
 cursor:pointer;
 transition:.3s;
+font-weight:700;
 }
 
 .upgrade:hover{
-transform:scale(1.05);
-background:#333;
+transform:scale(1.04);
+background:#292929;
 }
 
+/* كومبو */
 #combo{
 position:fixed;
-top:50%;
 left:50%;
+top:50%;
 transform:translate(-50%,-50%);
 font-size:80px;
 font-weight:900;
 opacity:0;
-color:red;
 pointer-events:none;
 text-shadow:0 0 30px red;
 }
 
 @media(max-width:768px){
 
-#title{
-font-size:35px;
-left:15px;
+#gameName{
+font-size:28px;
 }
 
 .character{
-transform:scale(.8);
+transform:scale(.75);
 }
 
 #shop{
-width:200px;
+width:210px;
 }
 
 #hpBar{
 width:250px;
 }
 
+.box{
+font-size:18px;
+min-width:150px;
+}
+
 }
 
 </style>
+</head>
 
-<div id="title">يزن عم عبدالله 😈</div>
+<body>
+
+<div class="background"></div>
+
+<div id="gameName">يزن عم عبدالله 😈</div>
 
 <div id="ui">
-<div class="box">💰 <span id="coins">0</span></div>
+<div class="box">💰 الكوينات: <span id="coins">0</span></div>
 <div class="box">👊 القوة: <span id="damage">1</span></div>
+<div class="box">🔥 أعلى كومبو: <span id="bestCombo">0</span></div>
 </div>
 
-<div id="game">
+<div id="arena">
 
 <div class="character" id="char">
 
 <div class="head">
 <div class="hair"></div>
+<div class="brow brow1"></div>
+<div class="brow brow2"></div>
 <div class="eye eye1"></div>
 <div class="eye eye2"></div>
 <div class="mouth"></div>
@@ -621,7 +704,9 @@ width:250px;
 <div class="arm arm1"></div>
 <div class="arm arm2"></div>
 
-<div class="body">عبدالله</div>
+<div class="body">
+عبدالله
+</div>
 
 <div class="leg leg1"></div>
 <div class="leg leg2"></div>
@@ -630,7 +715,7 @@ width:250px;
 
 </div>
 
-<div id="combo">COMBO x1</div>
+<div id="combo"></div>
 
 <div id="hpBar">
 <div id="hp"></div>
@@ -639,67 +724,81 @@ width:250px;
 <div id="shop">
 <h2>🔥 التطويرات</h2>
 
-<div class="upgrade" onclick="buy(20,2)">
-👊 لكمة حديدية - 20
+<div class="upgrade" onclick="buyUpgrade(50,2)">
+👊 قبضة قوية — 50
 </div>
 
-<div class="upgrade" onclick="buy(80,5)">
-💥 قوة خارقة - 80
+<div class="upgrade" onclick="buyUpgrade(150,5)">
+💥 ضربة خارقة — 150
 </div>
 
-<div class="upgrade" onclick="buy(200,15)">
-☠️ مود الوحش - 200
+<div class="upgrade" onclick="buyUpgrade(500,15)">
+☠️ وضع الوحش — 500
 </div>
 
 </div>
 
 <script>
 
-let coins = 0;
-let damage = 1;
-let hp = 100;
+let coins = Number(localStorage.getItem('coins')) || 0;
+let damage = Number(localStorage.getItem('damage')) || 1;
+let bestCombo = Number(localStorage.getItem('bestCombo')) || 0;
+
 let combo = 0;
+let hp = 100;
 
 const char = document.getElementById('char');
 const hpBar = document.getElementById('hp');
 const comboText = document.getElementById('combo');
+
+const coinsText = document.getElementById('coins');
+const damageText = document.getElementById('damage');
+const bestComboText = document.getElementById('bestCombo');
+
+updateUI();
 
 char.addEventListener('click',(e)=>{
 
 coins += damage;
 combo++;
 
-if(combo > 1){
-comboText.style.opacity = '1';
-comboText.innerHTML = `COMBO x${combo}`;
-
-setTimeout(()=>{
-comboText.style.opacity = '0';
-},400);
+if(combo > bestCombo){
+bestCombo = combo;
 }
 
 hp -= damage;
 
 if(hp <= 0){
 hp = 100;
-alert('☠️ تم دعس عبدالله بالكامل 😂');
 combo = 0;
+setTimeout(()=>{
+alert('☠️ تم إنهاء عبدالله بالكامل 😂');
+},100);
 }
 
 hpBar.style.width = hp + '%';
 
 char.classList.add('hit');
+document.body.classList.add('shake');
 
 setTimeout(()=>{
 char.classList.remove('hit');
-},150);
+document.body.classList.remove('shake');
+},160);
 
-for(let i=0;i<10;i++){
+comboText.style.opacity = '1';
+comboText.innerHTML = `COMBO x${combo}`;
+
+setTimeout(()=>{
+comboText.style.opacity = '0';
+},500);
+
+for(let i=0;i<12;i++){
 
 let blood = document.createElement('div');
 blood.classList.add('blood');
 
-blood.style.left = e.pageX + (Math.random()*80-40) + 'px';
+blood.style.left = e.pageX + (Math.random()*100-50) + 'px';
 blood.style.top = e.pageY + 'px';
 
 document.body.appendChild(blood);
@@ -710,36 +809,46 @@ blood.remove();
 
 }
 
-coinsText.innerHTML = coins;
-damageText.innerHTML = damage;
+saveData();
+updateUI();
 
 });
 
-function buy(price,power){
+function buyUpgrade(price,power){
 
 if(coins >= price){
+
 coins -= price;
 damage += power;
-coinsText.innerHTML = coins;
-damageText.innerHTML = damage;
+
+saveData();
+updateUI();
+
 }else{
-alert('😂 فلوسك ما تكفي');
+alert('❌ الكوينات غير كافية');
 }
 
+}
+
+function updateUI(){
+coinsText.innerHTML = coins;
+damageText.innerHTML = damage;
+bestComboText.innerHTML = bestCombo;
+}
+
+function saveData(){
+localStorage.setItem('coins',coins);
+localStorage.setItem('damage',damage);
+localStorage.setItem('bestCombo',bestCombo);
 }
 
 </script>
+
+</body>
+</html>
 ```
 
-## أفكار تضيفها بعدين
+## التحسينات الجديدة
 
-* زعيم نهائي
-* نظام مراحل
-* موسيقى حماسية
-* كاميرا تهتز
-* سكنات للشخصية
-* مود نار
-* تأثير Slow Motion
-* أسلحة وصواريخ
-* نظام إنجازات
-* Leaderboard
+* حفظ البيانات بالجهاز تلقائيًا
+* أنيميشن اح
