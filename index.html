@@ -1,482 +1,134 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة مواجهة عبدالله - نسخة الريبيرث الخارق</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght=400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --bg: #0b090a;
-            --panel: #161a1d;
-            --primary: #9b111e;
-            --secondary: #d90429;
-            --gold: #ffb703;
-            --text: #f8f9fa;
-            --rebirth-color: #00b4d8;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; user-select: none; }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            background: radial-gradient(circle at center, #2b0b10 0%, var(--bg) 100%);
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* شاشة إدخال الاسم */
-        .name-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(11, 9, 10, 0.98); z-index: 9999;
-            display: flex; justify-content: center; align-items: center;
-            opacity: 1; transition: 0.5s;
-        }
-        .name-modal.hidden { opacity: 0; pointer-events: none; }
-        .name-box {
-            background: var(--panel); border: 2px solid var(--primary);
-            padding: 40px; border-radius: 20px; text-align: center;
-            box-shadow: 0 0 40px rgba(155, 17, 30, 0.5); max-width: 400px; width: 90%;
-        }
-        .name-box h2 { font-size: 1.8rem; color: #fff; margin-bottom: 15px; }
-        .name-box input {
-            width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #444;
-            background: #000; color: #fff; font-size: 1.1rem; text-align: center; margin-bottom: 20px;
-            outline: none;
-        }
-        .name-box button {
-            background: var(--primary); color: white; border: none; padding: 12px 30px;
-            border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.2s;
-        }
-        .name-box button:hover { background: var(--secondary); transform: scale(1.05); }
-
-        /* الإحصائيات العلوية */
-        .header-stats {
-            width: 100%; max-width: 1100px;
-            display: flex; justify-content: space-between;
-            background: rgba(22, 26, 29, 0.95);
-            padding: 15px 25px; border-radius: 15px;
-            border: 2px solid var(--primary);
-            box-shadow: 0 0 20px rgba(155, 17, 30, 0.4);
-            margin-bottom: 20px; flex-wrap: wrap; gap: 10px; z-index: 10;
-        }
-        .stat-box { font-size: 1.2rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
-        .stat-box span { color: var(--gold); font-weight: 900; }
-        .rebirth-badge { color: var(--rebirth-color) !important; text-shadow: 0 0 10px rgba(0, 180, 216, 0.6); }
-
-        /* الكانتينر الرئيسي */
-        .main-container { display: flex; width: 100%; max-width: 1100px; gap: 20px; flex-wrap: wrap; z-index: 10; }
-
-        /* شاشة اللعب */
-        .game-screen {
-            flex: 1.2; min-width: 350px;
-            background: rgba(0, 0, 0, 0.6); border-radius: 20px; border: 1px solid rgba(155, 17, 30, 0.2);
-            padding: 20px; display: flex; flex-direction: column; align-items: center;
-            position: relative; height: 600px; justify-content: space-between;
-        }
-        .boss-info { width: 100%; text-align: center; }
-        .boss-name { font-size: 1.6rem; font-weight: 900; margin-bottom: 8px; color: #fff; }
-        .hp-bar-bg { width: 100%; height: 22px; background: #222; border-radius: 11px; overflow: hidden; border: 1px solid #444; }
-        .hp-bar-fill { width: 100%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); transition: width 0.08s ease; }
-
-        /* حلبة عبدالله */
-        .arena { width: 100%; height: 100%; display: flex; justify-content: center; align-items: flex-end; padding-bottom: 40px; position: relative; }
-        .character-dummy { width: 180px; height: 280px; position: relative; cursor: pointer; transition: transform 0.05s; z-index: 5; }
-        .dummy-head { width: 80px; height: 80px; background: #ffdbac; border-radius: 50%; margin: 0 auto; position: relative; border: 3px solid #333; z-index: 3; }
-        .dummy-hair { width: 86px; height: 30px; background: #111; position: absolute; top: -10px; left: -6px; border-radius: 20px 20px 0 0; }
-        .dummy-eye { width: 12px; height: 12px; background: #111; border-radius: 50%; position: absolute; top: 30px; }
-        .dummy-eye.left { left: 18px; } .dummy-eye.right { right: 18px; }
-        .dummy-mouth { width: 30px; height: 8px; background: #555; position: absolute; bottom: 15px; left: 22px; border-radius: 5px; }
-        .dummy-body { width: 120px; height: 140px; background: var(--primary); border-radius: 30px 30px 10px 10px; margin: -10px auto 0; border: 3px solid #333; position: relative; z-index: 2; }
-
-        .character-dummy.hit-anim { animation: characterPunch 0.15s ease-in-out; }
-        @keyframes characterPunch {
-            0% { transform: scale(1) translateY(0); }
-            30% { transform: scale(0.92) translateY(15px); }
-            100% { transform: scale(1) translateY(0); }
-        }
-
-        /* أرقام المؤثرات والضرر المنبثق */
-        .dmg-pop {
-            position: absolute; font-size: 2.3rem; font-weight: 900; color: #ff2a3a;
-            text-shadow: 0 0 8px #000; pointer-events: none; animation: flyUp 0.55s ease-out forwards; z-index: 100;
-        }
-        .dmg-pop.rebirth-pop {
-            color: var(--rebirth-color);
-            text-shadow: 0 0 12px rgba(0, 180, 216, 0.8), 0 0 5px #000;
-            font-size: 2.6rem;
-        }
-        @keyframes flyUp { 0% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-120px); } }
-
-        /* لافتة التهنئة المنبثقة */
-        .victory-toast {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.5);
-            background: rgba(22, 26, 29, 0.98); border: 3px solid var(--gold);
-            padding: 35px 55px; border-radius: 20px; text-align: center; opacity: 0; pointer-events: none; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 999;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
-        }
-        .victory-toast.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        .victory-toast.rebirth-toast {
-            border-color: var(--rebirth-color);
-            box-shadow: 0 0 40px rgba(0, 180, 216, 0.5);
-        }
-
-        /* اللوحات الجانبية */
-        .side-panels { flex: 1; min-width: 350px; display: flex; flex-direction: column; gap: 20px; }
-        .panel { background: var(--panel); border-radius: 20px; padding: 20px; border: 1px solid rgba(155, 17, 30, 0.3); }
-        .panel-title { font-size: 1.3rem; font-weight: 900; margin-bottom: 15px; border-bottom: 2px solid var(--primary); padding-bottom: 5px; display: flex; align-items: center; gap: 10px; }
-
-        /* المتجر الكبير */
-        .shop-list { max-height: 320px; overflow-y: auto; padding-right: 5px; }
-        .shop-list::-webkit-scrollbar { width: 6px; }
-        .shop-list::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
-        
-        .upgrade-item { 
-            display: flex; justify-content: space-between; align-items: center; 
-            background: rgba(0,0,0,0.4); padding: 12px; border-radius: 12px; 
-            margin-bottom: 8px; border: 1px solid rgba(255, 255, 255, 0.02);
-        }
-        .upgrade-info h4 { font-size: 1rem; color: #fff; margin-bottom: 2px; }
-        .upgrade-info p { font-size: 0.8rem; color: #aaa; }
-        .upgrade-info p span { color: var(--gold); font-weight: bold; }
-        .btn-buy { background: var(--primary); color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-weight: bold; cursor: pointer; white-space: nowrap; min-width: 80px; }
-        .btn-buy:disabled { background: #333; color: #777; cursor: not-allowed; }
-
-        .btn-rebirth { width: 100%; background: linear-gradient(45deg, #005f73, #00b4d8); color: white; border: none; padding: 14px; border-radius: 12px; font-size: 1.2rem; font-weight: 900; cursor: pointer; transition: 0.2s; text-shadow: 0 1px 3px rgba(0,0,0,0.4); }
-        .btn-rebirth:disabled { background: #222; color: #555; cursor: not-allowed; text-shadow: none; }
-        .btn-rebirth:not(:disabled):hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(0, 180, 216, 0.4); }
-
-        /* الليدربورد */
-        .leaderboard-list { max-height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
-        .leaderboard-row { display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.4); padding: 10px 15px; border-radius: 10px; }
-        .leaderboard-row.my-row { border: 1px solid var(--gold); background: linear-gradient(90deg, rgba(255,183,3,0.1), transparent); }
-        .rank-num { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.85rem; font-weight: 900; background: #333; }
-        .rank-num.top1 { background: var(--gold); color: #000; }
-        .rank-num.top2 { background: #e5e5e5; color: #000; }
-        .rank-num.top3 { background: #cd7f32; color: #fff; }
-        .global-loading { text-align: center; padding: 20px; color: #888; font-size: 0.9rem; }
-    </style>
+<meta charset="UTF-8">
+<title>S.U.P.E.R.N.O.V.A - Command Center</title>
+<style>
+    body, html { margin: 0; padding: 0; background-color: #000; color: #00ff00; font-family: monospace; }
+    .bg-image { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.1; z-index: -1; width: 60%; pointer-events: none; filter: grayscale(100%); }
+    .container { padding: 40px; max-width: 1000px; margin: auto; display: none; }
+    #auth-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    input, button { background: #000; border: 1px solid #00ff00; color: #00ff00; padding: 10px; margin: 5px 0; width: 100%; font-family: monospace; box-sizing: border-box; }
+    button { cursor: pointer; font-weight: bold; }
+    button:hover { background: #00ff00; color: #000; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #333; padding: 10px; text-align: left; }
+    th { background: #0f172a; color: #fff; }
+    .btn-acc { background: #004400; border-color: #00ff00; color: #00ff00; }
+    .btn-rej { background: #440000; border-color: #ff0000; color: #ff0000; }
+</style>
 </head>
 <body>
+<img src="S.U.P.E.R.N.O.V.A.png" class="bg-image" alt="Background">
 
-    <div class="name-modal" id="nameModal">
-        <div class="name-box">
-            <h2>🌍 سجل اسمك في ليدربورد الأغنياء!</h2>
-            <p style="color: #bbb; margin-bottom: 15px; font-size: 0.9rem;">اكتب اسمك للمنافسة على لقب أغنى لاعب في العالم:</p>
-            <input type="text" id="usernameInput" placeholder="اسم المستخدم..." maxlength="14">
-            <button id="saveNameBtn">دخول التحدي العالمي</button>
-        </div>
+<div id="auth-screen">
+    <div style="width: 300px; text-align: center;">
+        <h3 style="color: #ff0000;">RESTRICTED AREA</h3>
+        <input type="password" id="admin_key" placeholder="Enter 10-char Key">
+        <button onclick="verify()">AUTHENTICATE</button>
+        <p id="auth_msg" style="color:#ff0000;"></p>
     </div>
+</div>
 
-    <div class="victory-toast" id="victoryToast">
-        <h2 id="victoryTitle">👑 تم السحق!</h2>
-        <p id="victoryReward">انتقلت للمستوى التالي</p>
-    </div>
+<div id="admin-panel" class="container">
+    <h2>COMMAND CENTER: PENDING REQUESTS</h2>
+    <table>
+        <thead><tr><th>ID</th><th>User</th><th>Discord</th><th>Request</th><th>Action</th></tr></thead>
+        <tbody id="req-table"></tbody>
+    </table>
 
-    <div class="header-stats">
-        <div class="stat-box"><i class="fas fa-globe" style="color:#00b4d8"></i> العالمي: <span id="displayPlayerName">...</span></div>
-        <div class="stat-box"><i class="fas fa-coins" style="color:var(--gold)"></i> نقودك: <span id="coins">0</span></div>
-        <div class="stat-box"><i class="fas fa-crown" style="color:var(--rebirth-color)"></i> ريبيرث: <span id="rebirths" class="rebirth-badge">0</span></div>
-    </div>
+    <h2 style="margin-top: 40px;">ACCEPTED PERSONNEL</h2>
+    <table>
+        <thead><tr><th>Discord</th><th>Reason</th></tr></thead>
+        <tbody id="acc-table"></tbody>
+    </table>
+</div>
 
-    <div class="main-container">
-        <div class="game-screen">
-            <div class="boss-info">
-                <div class="boss-name">ليفل عبدالله الحالي: <span id="bossLvl">1</span></div>
-                <div class="hp-bar-bg"><div class="hp-bar-fill" id="hpBar"></div></div>
-                <div style="font-size: 0.95rem; margin-top: 6px; color: #ccc;" id="hpText">100 / 100 HP</div>
-            </div>
-            <div class="arena">
-                <div class="character-dummy" id="abdullah">
-                    <div class="dummy-head"><div class="dummy-hair"></div><div class="dummy-eye left"></div><div class="dummy-eye right"></div><div class="dummy-mouth"></div></div>
-                    <div class="dummy-body"></div>
-                </div>
-            </div>
-        </div>
+<script>
+    if(localStorage.getItem('admin_locked') === 'true') {
+        document.body.innerHTML = '';
+        document.body.style.backgroundColor = 'black';
+    }
 
-        <div class="side-panels">
-            <div class="panel">
-                <div class="panel-title"><i class="fas fa-shopping-cart" style="color:var(--primary)"></i> متجر التطويرات الأسطوري (محفوظ)</div>
-                <div class="shop-list" id="shopContainer">
-                    </div>
-            </div>
+    let attempts = parseInt(localStorage.getItem('admin_attempts') || '0');
 
-            <div class="panel" style="padding: 15px; border-color: var(--rebirth-color);">
-                <div style="font-weight: bold; margin-bottom: 8px;">سعر الريبيرث القادم: <span id="rebirthCost" style="color:var(--gold)">15000</span></div>
-                <button class="btn-rebirth" id="btnRebirth" disabled><i class="fas fa-sync-alt"></i> تفعيل ريبييرث خارق دائم</button>
-            </div>
+    function verify() {
+        const key = document.getElementById('admin_key').value;
+        const validKey = "S@p3rN0v#X"; 
+        
+        if(key.length !== 10) {
+            failAttempt();
+            return;
+        }
 
-            <div class="panel">
-                <div class="panel-title"><i class="fas fa-wallet" style="color:var(--gold)"></i> قائمة أغنى متصدري العالم (كل 5 ثوانٍ)</div>
-                <div class="leaderboard-list" id="globalLeaderboardContainer">
-                    <div class="global-loading">جاري الاتصال بالسحابة وجلب المتصدرين...</div>
-                </div>
-            </div>
-        </div>
-    </div>
+        if(key === validKey) {
+            document.getElementById('auth-screen').style.display = 'none';
+            document.getElementById('admin-panel').style.display = 'block';
+            loadData();
+        } else {
+            failAttempt();
+        }
+    }
 
-    <script>
-        const DB_URL = "https://kvdb.io/MN98VjUWhZg1N9n8VfXwY8/boss_game_leaderboard";
+    function failAttempt() {
+        attempts++;
+        localStorage.setItem('admin_attempts', attempts);
+        if(attempts >= 4) {
+            localStorage.setItem('admin_locked', 'true');
+            document.body.innerHTML = '';
+        } else {
+            document.getElementById('auth_msg').innerText = `ACCESS DENIED. ATTEMPTS REMAINING: ${4 - attempts}`;
+        }
+    }
 
-        let game = {
-            playerName: "", coins: 0, rebirths: 0, bossLevel: 1, maxHp: 100, currentHp: 100,
-            powers: { click: 1, auto: 0, moneyMult: 1 },
-            levels: { p1: 1, p2: 0, p3: 0, p4: 0, p5: 0, p6: 0, p7: 0, p8: 0, p9: 0, p10: 0 },
-            costs: { p1: 10, p2: 80, p3: 250, p4: 750, p5: 2000, p6: 6000, p7: 15000, p8: 40000, p9: 100000, p10: 300000, rebirth: 15000 }
-        };
+    function loadData() {
+        let requests = JSON.parse(localStorage.getItem('supernova_requests') || '[]');
+        let tbody = document.getElementById('req-table');
+        let accBody = document.getElementById('acc-table');
+        tbody.innerHTML = '';
+        accBody.innerHTML = '';
 
-        const shopUpgrades = [
-            { id: 1, key: 'p1', name: 'قبضة حديدية ✊', desc: 'زيادة ضرر الضغطة', add: 1, type: 'click' },
-            { id: 2, key: 'p2', name: 'الخيزرانة المرعبة 🪵', desc: 'زيادة ضرر الضغطة', add: 5, type: 'click' },
-            { id: 3, key: 'p3', name: 'أوتو كليكر بسيط ⚡', desc: 'ضرر تلقائي كل ثانية', add: 2, type: 'auto' },
-            { id: 4, key: 'p4', name: 'سيف التوتش الحاد ⚔️', desc: 'زيادة ضرر الضغطة', add: 25, type: 'click' },
-            { id: 5, key: 'p5', name: 'فزعة قزم محترف 🧝', desc: 'ضرر تلقائي قوي كل ثانية', add: 15, type: 'auto' },
-            { id: 6, key: 'p6', name: 'بطاقة الحظ المضاعفة 🃏', desc: 'مضاعف كوينز إضافي للضربة', add: 0.5, type: 'mult' },
-            { id: 7, key: 'p7', name: 'مطرقة الرعد والبرق 🔨', desc: 'زيادة ضرر الضغطة العنيف', add: 120, type: 'click' },
-            { id: 8, key: 'p8', name: 'روبوت مبرمج مخصص 🤖', desc: 'ضرر تلقائي جبار كل ثانية', add: 80, type: 'auto' },
-            { id: 9, key: 'p9', name: 'استثمار كوينز ذكي 📈', desc: 'مضاعف كوينز ضخم للضربة', add: 1.5, type: 'mult' },
-            { id: 10, key: 'p10', name: 'عقد رعاية أسطوري 💎', desc: 'مضاعف كوينز خارق للطبيعة', add: 4.0, type: 'mult' }
-        ];
-
-        function buildShopUI() {
-            const shopContainer = document.getElementById('shopContainer');
-            shopContainer.innerHTML = "";
-            shopUpgrades.forEach(up => {
-                let item = document.createElement('div');
-                item.className = "upgrade-item";
-                item.innerHTML = `
-                    <div class="upgrade-info">
-                        <h4>${up.name}</h4>
-                        <p>${up.desc} <span>+${up.add}</span> (مستوى <span id="lvl${up.id}">0</span>)</p>
-                    </div>
-                    <button class="btn-buy" id="btn${up.id}" onclick="buyUpgrade(${up.id}, '${up.key}', '${up.type}', ${up.add})">
-                        <span id="cost${up.id}">0</span> <i class="fas fa-coins"></i>
-                    </button>
+        requests.forEach(r => {
+            if(r.status === 'pending') {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${r.id}</td>
+                        <td>${r.user}</td>
+                        <td>${r.discord}</td>
+                        <td>${r.reason}</td>
+                        <td>
+                            <button class="btn-acc" onclick="processReq(${r.id}, 'ACCEPTED')">ACCEPT</button>
+                            <button class="btn-rej" onclick="processReq(${r.id}, 'REJECTED')">REJECT</button>
+                        </td>
+                    </tr>
                 `;
-                shopContainer.appendChild(item);
-            });
-        }
-
-        function buyUpgrade(id, key, type, addValue) {
-            if(game.coins >= game.costs[key]) {
-                game.coins -= game.costs[key];
-                game.levels[key]++;
-                
-                if(type === 'click') game.powers.click += addValue;
-                else if(type === 'auto') game.powers.auto += addValue;
-                else if(type === 'mult') game.powers.moneyMult += addValue;
-
-                game.costs[key] = Math.floor(game.costs[key] * 1.55);
-                updateUI(); saveGame(); uploadToGlobalDatabase();
-            }
-        }
-
-        async function uploadToGlobalDatabase() {
-            if(!game.playerName) return;
-            try {
-                await fetch(`${DB_URL}_${game.playerName}`, {
-                    method: 'POST',
-                    body: JSON.stringify({ name: game.playerName, rebirths: game.rebirths, coins: Math.floor(game.coins), time: Date.now() })
-                });
-            } catch(e) {}
-        }
-
-        async function downloadGlobalLeaderboard() {
-            try {
-                let res = await fetch(`${DB_URL}?prefix=boss_game_leaderboard_`);
-                let keys = await res.json();
-                
-                let allPlayers = [];
-                await Promise.all(keys.map(async (key) => {
-                    try {
-                        let pRes = await fetch(`https://kvdb.io/MN98VjUWhZg1N9n8VfXwY8/${key}`);
-                        let pData = await pRes.json();
-                        if(pData && pData.name) allPlayers.push(pData);
-                    } catch(err){}
-                }));
-
-                allPlayers.sort((a, b) => {
-                    if (b.coins !== a.coins) return b.coins - a.coins;
-                    return b.rebirths - a.rebirths;
-                });
-
-                const container = document.getElementById('globalLeaderboardContainer');
-                container.innerHTML = "";
-
-                if(allPlayers.length === 0) {
-                    container.innerHTML = `<div class="global-loading">أنت أول لاعب عالمي! اجمع النقود لتتصدر.</div>`;
-                    return;
-                }
-
-                allPlayers.slice(0, 10).forEach((user, index) => {
-                    let rankClass = index===0?"top1":index===1?"top2":index===2?"top3":"";
-                    let isMe = user.name === game.playerName;
-                    let row = document.createElement('div');
-                    row.className = `leaderboard-row ${isMe ? 'my-row' : ''}`;
-                    row.innerHTML = `
-                        <div class="rank-name">
-                            <div class="rank-num ${rankClass}">${index + 1}</div>
-                            <span style="${isMe?'color:var(--gold); font-weight:900;':''}">${user.name} ${isMe?'(أنت)':''}</span>
-                        </div>
-                        <div style="font-size:0.85rem; color:#ccc;">نقود: <b style="color:var(--gold)">${user.coins}</b> | ريبيرث: <b style="color:var(--rebirth-color)">${user.rebirths}</b></div>
-                    `;
-                    container.appendChild(row);
-                });
-            } catch (err) {
-                document.getElementById('globalLeaderboardContainer').innerHTML = `<div class="global-loading">جاري مزامنة ليدربورد الأغنياء...</div>`;
-            }
-        }
-
-        function initGlobalSystem() {
-            buildShopUI();
-            let savedName = localStorage.getItem('global_boss_name_v4');
-            if(!savedName) {
-                document.getElementById('nameModal').classList.remove('hidden');
-            } else {
-                game.playerName = savedName;
-                document.getElementById('nameModal').classList.add('hidden');
-                document.getElementById('displayPlayerName').innerText = game.playerName;
-                loadGame();
-            }
-        }
-
-        document.getElementById('saveNameBtn').addEventListener('click', () => {
-            let nameVal = document.getElementById('usernameInput').value.replace(/[^a-zA-Z0-9أ-ي_\s]/g, "").trim();
-            if(nameVal.length >= 2) {
-                localStorage.setItem('global_boss_name_v4', nameVal);
-                game.playerName = nameVal;
-                document.getElementById('nameModal').classList.add('hidden');
-                document.getElementById('displayPlayerName').innerText = game.playerName;
-                loadGame();
-                uploadToGlobalDatabase().then(() => downloadGlobalLeaderboard());
-            } else {
-                alert("اكتب اسم صحيح!");
+            } else if (r.status === 'ACCEPTED') {
+                accBody.innerHTML += `<tr><td>${r.discord}</td><td>${r.reason}</td></tr>`;
             }
         });
+    }
 
-        function loadGame() {
-            if(localStorage.getItem('global_game_save_v4')) {
-                game = JSON.parse(localStorage.getItem('global_game_save_v4'));
-                game.playerName = localStorage.getItem('global_boss_name_v4');
-                game.currentHp = game.maxHp;
-            }
-            updateUI();
-            downloadGlobalLeaderboard();
-        }
+    function processReq(id, status) {
+        let msg = prompt("Enter the message to send to the user:");
+        if(msg === null) return; 
 
-        function saveGame() {
-            localStorage.setItem('global_game_save_v4', JSON.stringify(game));
-        }
-
-        function updateUI() {
-            document.getElementById('coins').innerText = Math.floor(game.coins);
-            document.getElementById('bossLvl').innerText = game.bossLevel;
-            document.getElementById('rebirths').innerText = game.rebirths;
-
-            shopUpgrades.forEach(up => {
-                document.getElementById('lvl' + up.id).innerText = game.levels[up.key];
-                document.getElementById('cost' + up.id).innerText = game.costs[up.key];
-                document.getElementById('btn' + up.id).disabled = game.coins < game.costs[up.key];
+        let requests = JSON.parse(localStorage.getItem('supernova_requests') || '[]');
+        let responses = JSON.parse(localStorage.getItem('supernova_responses') || '[]');
+        
+        let reqIndex = requests.findIndex(r => r.id === id);
+        if(reqIndex > -1) {
+            requests[reqIndex].status = status;
+            responses.push({
+                user: requests[reqIndex].user,
+                status: status,
+                message: msg
             });
-
-            document.getElementById('rebirthCost').innerText = game.costs.rebirth;
-            document.getElementById('btnRebirth').disabled = game.coins < game.costs.rebirth;
-
-            let pct = (game.currentHp / game.maxHp) * 100;
-            document.getElementById('hpBar').style.width = Math.max(0, pct) + "%";
-            document.getElementById('hpText').innerText = `${Math.floor(game.currentHp)} / ${game.maxHp} HP`;
-        }
-
-        function checkDeath() {
-            if(game.currentHp <= 0) {
-                let reward = game.bossLevel * 120 * (1 + game.rebirths);
-                game.coins += reward;
-                
-                // إظهار لوحة الفوز العادية لليفل
-                const toast = document.getElementById('victoryToast');
-                toast.classList.remove('rebirth-toast');
-                document.getElementById('victoryTitle').innerText = "👑 تم السحق!";
-                document.getElementById('victoryReward').innerHTML = `هزمت عبدالله ليفل <b>${game.bossLevel}</b><br><span style="color:var(--gold)">+${reward} كوينز</span>`;
-                toast.classList.add('show');
-                setTimeout(() => { toast.classList.remove('show'); }, 1800);
-
-                game.bossLevel++;
-                game.maxHp = Math.floor(game.maxHp * 1.45);
-                game.currentHp = game.maxHp;
-                uploadToGlobalDatabase(); 
-            }
-        }
-
-        document.getElementById('abdullah').addEventListener('click', () => {
-            let dmg = game.powers.click * (1 + game.rebirths);
-            game.currentHp -= dmg;
             
-            let earnings = dmg * game.powers.moneyMult * (1 + game.rebirths);
-            game.coins += earnings;
-
-            document.getElementById('abdullah').classList.add('hit-anim');
-            setTimeout(() => document.getElementById('abdullah').classList.remove('hit-anim'), 120);
-
-            // إنشاء تأثير رقم الكوينز المضاف عند الضرب
-            const pop = document.createElement('div');
-            // لو عنده ريبيرث، نخلي شكل ومؤثرات الرقم مشعة وزرقاء عشان يدري بفرق القوة!
-            if (game.rebirths > 0) {
-                pop.className = 'dmg-pop rebirth-pop';
-                pop.innerText = `+${Math.floor(earnings)} ✨`;
-            } else {
-                pop.className = 'dmg-pop';
-                pop.innerText = `+${Math.floor(earnings)}`;
-            }
-            pop.style.left = `calc(50% + ${Math.random()*40-20}px)`; pop.style.top = `45%`;
-            document.querySelector('.game-screen').appendChild(pop); setTimeout(() => pop.remove(), 550);
-
-            checkDeath(); updateUI(); saveGame();
-        });
-
-        // تشغيل زر تفعيل الريبيرث وإظهار تنبيه خارق ومميز للكل
-        document.getElementById('btnRebirth').addEventListener('click', () => {
-            if(game.coins >= game.costs.rebirth) {
-                game.rebirths++;
-                
-                // تصفير وبدء المود الخارق مع الاحتفاظ بليفل الريبرث الجديد
-                game.coins = 0; game.bossLevel = 1; game.maxHp = 100; game.currentHp = 100;
-                game.powers = { click: 1, auto: 0, moneyMult: 1 };
-                game.levels = { p1: 1, p2: 0, p3: 0, p4: 0, p5: 0, p6: 0, p7: 0, p8: 0, p9: 0, p10: 0 };
-                game.costs = { p1: 10, p2: 80, p3: 250, p4: 750, p5: 2000, p6: 6000, p7: 15000, p8: 40000, p9: 100000, p10: 300000, rebirth: Math.floor(game.costs.rebirth * 2.5) };
-                
-                // 🌌 تشغيل تنبيه الـ Rebirth المنبثق والخارق للألوان
-                const toast = document.getElementById('victoryToast');
-                toast.classList.add('rebirth-toast');
-                document.getElementById('victoryTitle').innerHTML = `<span style="color:var(--rebirth-color)">⚡ ريبيرث عالمي خارق! ⚡</span>`;
-                document.getElementById('victoryReward').innerHTML = `أنت الآن في <b>المستوى السحابي رقم [ ${game.rebirths} ]</b><br><span style="color:#aaa; font-size:0.85rem">تم تفعيل مضاعف الأرباح والضرر بنجاح وجاري تحديث العالم!</span>`;
-                toast.classList.add('show');
-                setTimeout(() => { toast.classList.remove('show'); }, 3000);
-
-                updateUI(); saveGame(); 
-                // رفع فوري للسحابة وتحديث الليدربورد عشان يظهر مباشرة لكل المنافسين
-                uploadToGlobalDatabase().then(() => downloadGlobalLeaderboard());
-            }
-        });
-
-        setInterval(() => {
-            if(game.powers.auto > 0) {
-                game.currentHp -= game.powers.auto * (1 + game.rebirths);
-                game.coins += game.powers.auto * game.powers.moneyMult * (1 + game.rebirths);
-                checkDeath(); updateUI(); saveGame();
-            }
-        }, 1000);
-
-        setInterval(() => { downloadGlobalLeaderboard(); }, 5000);
-        setInterval(() => { uploadToGlobalDatabase(); }, 15000);
-
-        initGlobalSystem();
-    </script>
+            localStorage.setItem('supernova_requests', JSON.stringify(requests));
+            localStorage.setItem('supernova_responses', JSON.stringify(responses));
+            loadData();
+        }
+    }
+</script>
 </body>
 </html>
