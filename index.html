@@ -2,49 +2,51 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>S.U.P.E.R.N.O.V.A - Command Center</title>
+<title>S.U.P.E.R.N.O.V.A - Command Control</title>
 <style>
     body, html { margin: 0; padding: 0; background-color: #000; color: #00ff00; font-family: monospace; }
-    .bg-image { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.1; z-index: -1; width: 60%; pointer-events: none; filter: grayscale(100%); }
-    .container { padding: 40px; max-width: 1000px; margin: auto; display: none; }
+    .bg-image { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.08; z-index: -1; width: 65%; pointer-events: none; filter: grayscale(100%); }
+    .container { padding: 40px; max-width: 1100px; margin: auto; display: none; }
     #auth-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-    input, button { background: #000; border: 1px solid #00ff00; color: #00ff00; padding: 10px; margin: 5px 0; width: 100%; font-family: monospace; box-sizing: border-box; }
+    input, button { background: #000; border: 1px solid #00ff00; color: #00ff00; padding: 12px; margin: 8px 0; width: 100%; font-family: monospace; box-sizing: border-box; }
     button { cursor: pointer; font-weight: bold; }
     button:hover { background: #00ff00; color: #000; }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    th, td { border: 1px solid #333; padding: 10px; text-align: left; }
-    th { background: #0f172a; color: #fff; }
-    .btn-acc { background: #004400; border-color: #00ff00; color: #00ff00; }
-    .btn-rej { background: #440000; border-color: #ff0000; color: #ff0000; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 30px; }
+    th, td { border: 1px solid #222; padding: 12px; text-align: left; }
+    th { background: #0a101d; color: #00ff00; }
+    .btn-acc { background: #003300; border-color: #00ff00; color: #00ff00; }
+    .btn-rej { background: #330000; border-color: #ff0000; color: #ff0000; }
 </style>
 </head>
 <body>
 <img src="S.U.P.E.R.N.O.V.A.png" class="bg-image" alt="Background">
 
 <div id="auth-screen">
-    <div style="width: 300px; text-align: center;">
-        <h3 style="color: #ff0000;">RESTRICTED AREA</h3>
-        <input type="password" id="admin_key" placeholder="Enter 10-char Key">
+    <div style="width: 320px; text-align: center;">
+        <h3 style="color: #ff0000; letter-spacing: 2px;">RESTRICTED AREA</h3>
+        <input type="password" id="admin_key" placeholder="Enter 10-Char Key">
         <button onclick="verify()">AUTHENTICATE</button>
-        <p id="auth_msg" style="color:#ff0000;"></p>
+        <p id="auth_msg" style="color:#ff0000; margin-top:10px;"></p>
     </div>
 </div>
 
 <div id="admin-panel" class="container">
-    <h2>COMMAND CENTER: PENDING REQUESTS</h2>
+    <h2>COMMAND CENTER: PENDING REQUESTS MONITOR</h2>
     <table>
-        <thead><tr><th>ID</th><th>User</th><th>Discord</th><th>Request</th><th>Action</th></tr></thead>
+        <thead><tr><th>ID</th><th>User</th><th>Discord</th><th>Request Reason</th><th>Action</th></tr></thead>
         <tbody id="req-table"></tbody>
     </table>
 
-    <h2 style="margin-top: 40px;">ACCEPTED PERSONNEL</h2>
+    <h2>ACCEPTED PERSONNEL DIRECTORY</h2>
     <table>
-        <thead><tr><th>Discord</th><th>Reason</th></tr></thead>
+        <thead><tr><th>Discord Username</th><th>Cooperation Details</th></tr></thead>
         <tbody id="acc-table"></tbody>
     </table>
 </div>
 
 <script>
+    let isAuthenticated = false;
+
     if(localStorage.getItem('admin_locked') === 'true') {
         document.body.innerHTML = '';
         document.body.style.backgroundColor = 'black';
@@ -62,6 +64,7 @@
         }
 
         if(key === validKey) {
+            isAuthenticated = true;
             document.getElementById('auth-screen').style.display = 'none';
             document.getElementById('admin-panel').style.display = 'block';
             loadData();
@@ -109,8 +112,11 @@
     }
 
     function processReq(id, status) {
-        let msg = prompt("Enter the message to send to the user:");
-        if(msg === null) return; 
+        let customMsg = prompt("Enter decision note:");
+        if(customMsg === null) return;
+
+        // Automatically appends the required instruction to wait for Discord contact
+        let fullMessage = customMsg + " (Please wait for contact from an organization member on Discord / انتظر الرد والتواصل من أحد أعضاء المنظمة في الديسكورد)";
 
         let requests = JSON.parse(localStorage.getItem('supernova_requests') || '[]');
         let responses = JSON.parse(localStorage.getItem('supernova_responses') || '[]');
@@ -119,9 +125,10 @@
         if(reqIndex > -1) {
             requests[reqIndex].status = status;
             responses.push({
+                reqId: id,
                 user: requests[reqIndex].user,
                 status: status,
-                message: msg
+                message: fullMessage
             });
             
             localStorage.setItem('supernova_requests', JSON.stringify(requests));
@@ -129,6 +136,13 @@
             loadData();
         }
     }
+
+    // Real-Time Auto Sync (Refreshes data every 2 seconds)
+    setInterval(() => {
+        if(isAuthenticated) {
+            loadData();
+        }
+    }, 2000);
 </script>
 </body>
 </html>
