@@ -46,6 +46,7 @@
 
 <script>
     let isAuthenticated = false;
+    const sysChannel = new BroadcastChannel('supernova_net');
 
     if(localStorage.getItem('admin_locked') === 'true') {
         document.body.innerHTML = '';
@@ -85,7 +86,15 @@
     }
 
     function loadData() {
-        let requests = JSON.parse(localStorage.getItem('supernova_requests') || '[]');
+        if(!isAuthenticated) return;
+        
+        let requests = [];
+        try {
+            requests = JSON.parse(localStorage.getItem('supernova_requests') || '[]');
+        } catch(e) {
+            requests = [];
+        }
+
         let tbody = document.getElementById('req-table');
         let accBody = document.getElementById('acc-table');
         tbody.innerHTML = '';
@@ -115,7 +124,6 @@
         let customMsg = prompt("Enter decision note:");
         if(customMsg === null) return;
 
-        // Automatically appends the required instruction to wait for Discord contact
         let fullMessage = customMsg + " (Please wait for contact from an organization member on Discord / انتظر الرد والتواصل من أحد أعضاء المنظمة في الديسكورد)";
 
         let requests = JSON.parse(localStorage.getItem('supernova_requests') || '[]');
@@ -133,16 +141,16 @@
             
             localStorage.setItem('supernova_requests', JSON.stringify(requests));
             localStorage.setItem('supernova_responses', JSON.stringify(responses));
+            
+            sysChannel.postMessage({ type: 'DATA_UPDATED' });
             loadData();
         }
     }
 
-    // Real-Time Auto Sync (Refreshes data every 2 seconds)
-    setInterval(() => {
-        if(isAuthenticated) {
-            loadData();
-        }
-    }, 2000);
+    // Instant Dual Listening Engine
+    sysChannel.onmessage = () => loadData();
+    window.addEventListener('storage', () => loadData());
+    setInterval(loadData, 2000);
 </script>
 </body>
 </html>
